@@ -53,6 +53,7 @@ extension on SyncStateRecord {
     DateTime? lastAttemptedSyncAt,
     SyncStatus? status,
     String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return SyncStateRecord(
       id: id ?? this.id,
@@ -61,7 +62,7 @@ extension on SyncStateRecord {
       lastSuccessfulSyncAt: lastSuccessfulSyncAt ?? this.lastSuccessfulSyncAt,
       lastAttemptedSyncAt: lastAttemptedSyncAt ?? this.lastAttemptedSyncAt,
       status: status ?? this.status,
-      errorMessage: errorMessage,
+      errorMessage: clearErrorMessage ? null : errorMessage ?? this.errorMessage,
     );
   }
 }
