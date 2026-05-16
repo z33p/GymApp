@@ -184,7 +184,7 @@ private final class AppleHealthService {
       payload["distanceMeters"] = distance
     }
 
-    // TODO: Aggregate heart rate samples per workout when the richer stats pass is added.
+    // TODO: Use HKStatisticsQuery over heart-rate samples inside the workout interval to populate average and max BPM.
     payload["averageHeartRate"] = NSNull()
     payload["maxHeartRate"] = NSNull()
 
