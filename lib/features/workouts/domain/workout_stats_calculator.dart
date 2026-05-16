@@ -6,6 +6,8 @@ import 'imported_workout.dart';
 class WorkoutStatsCalculator {
   const WorkoutStatsCalculator();
 
+  static const int maxStreakDays = 365;
+
   WorkoutProgressStats calculate(List<ImportedWorkout> workouts, {DateTime? now}) {
     final reference = (now ?? DateTime.now()).toUtc();
     final startOfWeek = DateTime.utc(reference.year, reference.month, reference.day)
@@ -23,7 +25,7 @@ class WorkoutStatsCalculator {
 
     var streak = 0;
     var cursor = DateTime.utc(reference.year, reference.month, reference.day);
-    while (streak < 365 && distinctWorkoutDays.contains(cursor)) {
+    while (streak < maxStreakDays && distinctWorkoutDays.contains(cursor)) {
       streak += 1;
       cursor = cursor.subtract(const Duration(days: 1));
     }

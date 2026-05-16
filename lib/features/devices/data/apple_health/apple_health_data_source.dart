@@ -16,6 +16,10 @@ class AppleHealthSyncPayload {
 }
 
 class AppleHealthDataSource {
+  static const String statusUnsupported = 'unsupported';
+  static const String statusUnavailable = 'unavailable';
+  static const String statusNotDetermined = 'notDetermined';
+
   AppleHealthDataSource() : _channel = const MethodChannel('com.gymapp.health/apple_health');
 
   final MethodChannel _channel;
@@ -32,11 +36,11 @@ class AppleHealthDataSource {
   }
 
   Future<String> getAuthorizationStatus() async {
-    if (!isSupportedPlatform) return 'unsupported';
+    if (!isSupportedPlatform) return statusUnsupported;
     try {
-      return (await _channel.invokeMethod<String>('getAuthorizationStatus')) ?? 'notDetermined';
+      return (await _channel.invokeMethod<String>('getAuthorizationStatus')) ?? statusNotDetermined;
     } on PlatformException {
-      return 'unavailable';
+      return statusUnavailable;
     }
   }
 

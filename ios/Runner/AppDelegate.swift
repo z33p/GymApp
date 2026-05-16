@@ -46,6 +46,8 @@ import UIKit
 }
 
 private final class AppleHealthService {
+  private let initialLookbackDays = 90
+
   init(healthStore: HKHealthStore, formatter: ISO8601DateFormatter) {
     self.healthStore = healthStore
     self.formatter = formatter
@@ -115,7 +117,7 @@ private final class AppleHealthService {
       return
     }
 
-    let predicateStart = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date()
+    let predicateStart = Calendar.current.date(byAdding: .day, value: -initialLookbackDays, to: Date()) ?? Date()
     let predicate = HKQuery.predicateForSamples(withStart: predicateStart, end: nil, options: .strictStartDate)
     let anchor = decodeAnchor(from: anchorData)
 

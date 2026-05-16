@@ -44,6 +44,7 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsControllerProvider).valueOrNull;
     final bootstrap = ref.watch(bootstrapProvider);
+    final bootstrapSyncWarning = ref.watch(bootstrapSyncWarningProvider);
 
     return MaterialApp.router(
       title: 'GymApp',
@@ -53,7 +54,7 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
       themeMode: settings?.themeMode ?? ThemeMode.system,
       routerConfig: router,
       builder: (context, child) {
-        return bootstrap.when(
+        final content = bootstrap.when(
           data: (_) => child ?? const SizedBox.shrink(),
           error: (error, _) => Material(
             child: Center(
@@ -80,6 +81,29 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
               child: CircularProgressIndicator(),
             ),
           ),
+        );
+
+        if (bootstrapSyncWarning == null || bootstrap.isLoading || bootstrap.hasError) {
+          return content;
+        }
+
+        return Column(
+          children: [
+            MaterialBanner(
+              content: Text(bootstrapSyncWarning),
+              actions: [
+                TextButton(
+                  onPressed: () => ref.read(syncControllerProvider.notifier).syncAppleHealth(),
+                  child: const Text('Retry sync'),
+                ),
+                TextButton(
+                  onPressed: () => ref.read(bootstrapSyncWarningProvider.notifier).state = null,
+                  child: const Text('Dismiss'),
+                ),
+              ],
+            ),
+            Expanded(child: content),
+          ],
         );
       },
     );

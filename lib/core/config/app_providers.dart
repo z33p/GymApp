@@ -62,6 +62,7 @@ final fitnessImportRepositoryProvider = Provider<FitnessImportRepository>((ref) 
 
 final refreshTickerProvider = StateProvider<int>((ref) => 0);
 final historyFiltersProvider = StateProvider<WorkoutFilterState>((ref) => const WorkoutFilterState());
+final bootstrapSyncWarningProvider = StateProvider<String?>((ref) => null);
 
 final currentUserProvider = FutureProvider<AppUser?>((ref) async {
   ref.watch(refreshTickerProvider);
@@ -72,11 +73,14 @@ final bootstrapProvider = FutureProvider<void>((ref) async {
   final authRepository = ref.watch(authRepositoryProvider);
   await authRepository.ensureMockUser();
   ref.invalidate(currentUserProvider);
+  ref.read(bootstrapSyncWarningProvider.notifier).state = null;
   try {
     await ref.watch(fitnessImportRepositoryProvider).sync(FitnessProviderType.appleHealth);
   } catch (error, stackTrace) {
     debugPrint('Bootstrap sync failed: $error');
     debugPrintStack(stackTrace: stackTrace);
+    ref.read(bootstrapSyncWarningProvider.notifier).state =
+        'Startup sync could not complete. You can retry from Devices.';
   }
   ref.read(refreshTickerProvider.notifier).state++;
 });
