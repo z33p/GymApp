@@ -184,7 +184,7 @@ private final class AppleHealthService {
       payload["distanceMeters"] = distance
     }
 
-    // TODO: Use HKStatisticsQuery over heart-rate samples inside the workout interval to populate average and max BPM.
+    // Heart-rate aggregation is intentionally deferred for the MVP; the current sync only imports workout-level fields.
     payload["averageHeartRate"] = NSNull()
     payload["maxHeartRate"] = NSNull()
 

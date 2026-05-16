@@ -23,7 +23,7 @@ class WorkoutStatsCalculator {
 
     var streak = 0;
     var cursor = DateTime.utc(reference.year, reference.month, reference.day);
-    while (distinctWorkoutDays.contains(cursor)) {
+    while (streak < 365 && distinctWorkoutDays.contains(cursor)) {
       streak += 1;
       cursor = cursor.subtract(const Duration(days: 1));
     }

@@ -74,7 +74,10 @@ final bootstrapProvider = FutureProvider<void>((ref) async {
   ref.invalidate(currentUserProvider);
   try {
     await ref.watch(fitnessImportRepositoryProvider).sync(FitnessProviderType.appleHealth);
-  } catch (_) {}
+  } catch (error, stackTrace) {
+    debugPrint('Bootstrap sync failed: $error');
+    debugPrintStack(stackTrace: stackTrace);
+  }
   ref.read(refreshTickerProvider.notifier).state++;
 });
 
