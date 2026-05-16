@@ -16,19 +16,11 @@ class MockAuthDataSource {
     if (existing != null) return existing;
 
     final now = DateTime.now().toUtc();
-    const user = AppUser(
+    final newUser = AppUser(
       id: 'local-user-1',
       displayName: 'Alex GymApp',
       username: 'alexgym',
       avatarUrl: null,
-      createdAt: DateTime.utc(2024, 1, 1),
-      updatedAt: DateTime.utc(2024, 1, 1),
-    );
-    final newUser = AppUser(
-      id: user.id,
-      displayName: user.displayName,
-      username: user.username,
-      avatarUrl: user.avatarUrl,
       createdAt: now,
       updatedAt: now,
     );
