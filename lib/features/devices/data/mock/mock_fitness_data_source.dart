@@ -11,7 +11,7 @@ class MockFitnessDataSource {
       ImportedWorkout(
         externalId: 'mock-workout-1',
         platform: WorkoutPlatform.mock,
-        sourceName: 'Apple Watch Preview',
+        sourceName: 'Preview Device',
         activityType: 'traditional_strength_training',
         startTime: now.subtract(const Duration(days: 1, hours: 2)),
         endTime: now.subtract(const Duration(days: 1, hours: 1, minutes: 12)),
@@ -28,7 +28,7 @@ class MockFitnessDataSource {
       ImportedWorkout(
         externalId: 'mock-workout-2',
         platform: WorkoutPlatform.mock,
-        sourceName: 'Preview Run',
+        sourceName: 'Preview Fitness App',
         activityType: 'running',
         startTime: now.subtract(const Duration(days: 3, hours: 3)),
         endTime: now.subtract(const Duration(days: 3, hours: 2, minutes: 20)),
