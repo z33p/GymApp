@@ -26,6 +26,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>GymApp imports workouts that are already stored in Apple Health.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>GymApp does not write workouts today, but HealthKit may require this string for future sync improvements.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

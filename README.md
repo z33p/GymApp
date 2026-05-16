@@ -1,17 +1,17 @@
-# gym_app
+# GymApp
 
-A Flutter app that imports workouts from Apple Health and stores them locally.
+GymApp is a Flutter mobile MVP focused on automatically importing workouts that were recorded elsewhere, especially workouts written into Apple Health by Apple Watch.
 
-## Getting Started
+## Vertical slice included
+- Local mock user bootstrap
+- Riverpod + go_router app shell with bottom navigation
+- Local SQLite persistence for workouts, sync state, check-ins, and app user
+- Devices screen with Apple Health connect/sync flow and preview fallback
+- Manual sync plus startup/resume sync orchestration
+- Activity feed, history list, workout detail, progress dashboard, and settings
+- Native iOS MethodChannel HealthKit integration scaffold
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Notes
+- iOS reads from Apple Health through `com.gymapp.health/apple_health`.
+- Unsupported platforms and iOS simulator fall back to preview workout data.
+- Android is structured for future Health Connect and Garmin integrations.
