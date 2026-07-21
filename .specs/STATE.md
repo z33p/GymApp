@@ -50,7 +50,20 @@
 - **Date**: 2026-07-21
 - **Status**: active
 
+### AD-007
+- **Decision**: Keep SQLite as the local owner of workouts, imports and cache; use PostgreSQL 15+ for remote identity, groups, seasons, claims, leaderboard, social fauna and mural.
+- **Reason**: This preserves the offline flow while enforcing shared ranking and authorization rules on the server.
+- **Trade-off**: The future API must map external identities, set `SET LOCAL app.user_id` per client transaction and use administrative credentials separate from Flutter.
+- **Scope**: Remote groups, gamification and social integration.
+- **Date**: 2026-07-21
+- **Status**: active
+
 ## Handoff
+
+- **Current feature**: PostgreSQL Social Schema / `.specs/features/postgres-social-schema/spec.md`
+- **Current status**: Complete — independent static validation PASS; migrations and runtime smoke still need PostgreSQL 15+ on a machine with `psql`.
+- **Next step**: choose host/auth, then execute `database/postgres/scripts/verify_postgres_schema.ps1` before integrating Flutter.
+- **Runtime blocker**: this Windows machine has no psql, Docker or WSL configured.
 
 - **Feature**: Product baseline / `.specs/features/product-baseline/spec.md`
 - **Phase / Task**: Complete — segunda validação independente PASS

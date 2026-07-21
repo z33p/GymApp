@@ -8,9 +8,9 @@ Grupos, ranking, identidade e mural precisam ser compartilhados entre aparelhos 
 
 ## Goals
 
-- [ ] Disponibilizar migrations PostgreSQL ordenadas para toda informação remota do MVP social.
-- [ ] Modelar login externo, grupos privados, temporadas, regras, claims, ranking, fauna e mural.
-- [ ] Fornecer scripts de aplicação e smoke test para Windows, macOS e Linux.
+- [x] Disponibilizar migrations PostgreSQL ordenadas para toda informação remota do MVP social.
+- [x] Modelar login externo, grupos privados, temporadas, regras, claims, ranking, fauna e mural.
+- [x] Fornecer scripts de aplicação e smoke test para Windows, macOS e Linux.
 
 ## Out of scope
 
@@ -67,9 +67,9 @@ As a membro ativo, quero publicar, comentar e reagir no mural do meu grupo, para
 
 | ID | Requirement | Task | Status |
 | --- | --- | --- | --- |
-| PG-01 | Migrations reproduzíveis e contrato local/remoto | T1, T5 | Implementing |
-| PG-02 | Identidade, grupos, membros e temporadas | T2 | Pending |
-| PG-03 | Claims idempotentes e regras de score | T3 | Pending |
-| PG-04 | Ranking e estado remoto de fauna | T3 | Pending |
-| PG-05 | Mural e moderação privados | T4 | Pending |
-| PG-06 | RLS por sessão e scripts verificáveis | T4, T5 | Pending |
+| PG-01 | Migrations reproduzíveis e contrato local/remoto | T1, T5 | Verified static |
+| PG-02 | Identidade, grupos, membros e temporadas | T2 | Verified static |
+| PG-03 | Claims idempotentes e regras de score | T3 | Verified static |
+| PG-04 | Ranking e estado remoto de fauna | T3 | Verified static |
+| PG-05 | Mural e moderação privados | T4 | Verified static |
+| PG-06 | RLS por sessão e scripts verificáveis | T4, T5 | Verified static |
