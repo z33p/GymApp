@@ -2,7 +2,14 @@
 
 **Spec:** `.specs/features/social-gamification-roadmap/spec.md`
 **Design:** `.specs/features/social-gamification-roadmap/design.md`
-**Status:** In Progress — Fase 0
+**Status:** Done — Fase 0
+
+## Execution result
+
+- T1: complete — rank calculator and 4 unit tests.
+- T2: complete — mascot widget and 2 widget tests.
+- T3: complete — Habitat route, provider and 2 widget tests.
+- T4: complete — analyzer, 11 tests and debug APK gate passed.
 
 ## Test Coverage Matrix
 

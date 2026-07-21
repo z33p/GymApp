@@ -137,8 +137,8 @@ Como membro, quero metas curtas além do ranking para voltar ao app durante a se
 | FAUNA-01 | Regra de ranking configurável por grupo | P1 | Pending |
 | FAUNA-02 | Participação sincronizada ou por publicação | P1 | Pending |
 | FAUNA-03 | Limites mínimos/máximos e teto diário | P1 | Pending |
-| FAUNA-04 | Tiers, facção, Forma e Legado | P1 | Pending |
-| FAUNA-05 | Mascote visível no Home, perfil e ranking | P1 | Pending |
+| FAUNA-04 | Tiers, facção, Forma e Legado | P1 | Implemented partially — Forma/Legado local; facção futura |
+| FAUNA-05 | Mascote visível no Home, perfil e ranking | P1 | Implemented partially — Habitat/Home nesta fase |
 | FAUNA-06 | Grupos privados e ranking de temporada | P1 | Pending |
 | FAUNA-07 | Mural, posts, reações, comentários e moderação básica | P1 | Pending |
 | FAUNA-08 | Login social e banner de conexão não bloqueante | P2 | Pending |

@@ -60,5 +60,6 @@
 - **Blockers**: nenhum
 - **iOS readiness**: AppIcon vazio corrigido; Podfile, atalhos VS Code e gate macOS documentados.
 - **Product roadmap**: Fauna Social & Gamification desenhado; aguarda autorização para plano técnico e implementação.
+- **Current implementation**: Fauna Foundation concluída — rank local, mascote, Habitat/Home e APK debug validados; grupos/backend ainda pendentes.
 - **Uncommitted files**: nenhum após o commit final de validação
 - **Branch**: master
