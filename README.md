@@ -27,3 +27,19 @@ chmod +x scripts/setup_ios_macos.sh
 ```
 
 O script verifica Flutter, Xcode Command Line Tools e CocoaPods, executa `flutter pub get`, instala os pods e valida o workspace. Use `--clean` para limpar o build antes da preparação. O desenvolvimento pode continuar no VS Code; o Xcode só precisa estar instalado para fornecer o toolchain e o simulador.
+
+## Preparar Android no Windows
+
+No PowerShell, após clonar:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\setup_android_windows.ps1 -Clean
+```
+
+O script detecta Flutter, JDK 17 e Android SDK, executa `flutter pub get`, análise, testes e gera `build\app\outputs\flutter-apk\app-debug.apk`. Para executar diretamente em um emulador ou aparelho conectado, informe o device:
+
+```powershell
+flutter devices
+.\scripts\setup_android_windows.ps1 -Device <device-id>
+```
