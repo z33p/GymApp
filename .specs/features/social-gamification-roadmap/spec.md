@@ -1,6 +1,6 @@
 # Fauna Social & Gamification — Product Roadmap
 
-**Status:** direção de produto aprovada; implementação ainda não iniciada.
+**Status:** direção aprovada; Fase 0 (Fauna Foundation) implementada parcialmente; social remoto ainda não iniciado.
 
 ## Problema
 

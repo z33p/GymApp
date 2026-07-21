@@ -43,11 +43,11 @@ T1 → T2 → T3 → T4
 **Requirement:** FAUNA-04
 **Done when:**
 
-- [ ] Estado vazio começa em Rato com Forma zero.
-- [ ] Limites de Rato/Lobo/Urso/Rinoceronte/Gorila são testados.
-- [ ] Forma considera somente workouts da janela móvel de 28 dias.
-- [ ] Legado anual permanece contando workouts do ano mesmo quando antigos para Forma.
-- [ ] `flutter test` passa com os testes novos e existentes.
+- [x] Estado vazio começa em Rato com Forma zero.
+- [x] Limites de Rato/Lobo/Urso/Rinoceronte/Gorila são testados.
+- [x] Forma considera somente workouts da janela móvel de 28 dias.
+- [x] Legado anual permanece contando workouts do ano mesmo quando antigos para Forma.
+- [x] `flutter test` passa com os testes novos e existentes.
 
 **Tests:** unit
 **Gate:** quick
@@ -61,10 +61,10 @@ T1 → T2 → T3 → T4
 **Requirement:** FAUNA-05
 **Done when:**
 
-- [ ] Cada tier renderiza nome e mascote correspondente.
-- [ ] O widget expõe semântica legível para acessibilidade.
-- [ ] Estado de facção não selecionada não afirma Leão ou Dragão.
-- [ ] `flutter test` passa.
+- [x] Cada tier renderiza nome e mascote correspondente.
+- [x] O widget expõe semântica legível para acessibilidade.
+- [x] Estado de facção não selecionada não afirma Leão ou Dragão.
+- [x] `flutter test` passa.
 
 **Tests:** widget
 **Gate:** quick
@@ -78,12 +78,12 @@ T1 → T2 → T3 → T4
 **Requirement:** FAUNA-04, FAUNA-05
 **Done when:**
 
-- [ ] Home mostra mascote, tier, Forma, Legado e progresso para o próximo tier.
-- [ ] Home mostra CTA `Sincronizar agora` e resumo dos workouts recentes.
-- [ ] Estado sem workouts mostra Rato e orientação para sincronizar.
-- [ ] Tab inicial é `Habitat`; Feed continua acessível por rota existente.
-- [ ] Widget test cobre estado populado e vazio.
-- [ ] `flutter test` passa.
+- [x] Home mostra mascote, tier, Forma, Legado e progresso para o próximo tier.
+- [x] Home mostra CTA `Sincronizar agora` e resumo dos workouts recentes.
+- [x] Estado sem workouts mostra Rato e orientação para sincronizar.
+- [x] Tab inicial é `Habitat`; Feed continua acessível por rota existente.
+- [x] Widget test cobre estado populado, vazio e loading.
+- [x] `flutter test` passa.
 
 **Tests:** widget
 **Gate:** quick
@@ -97,11 +97,11 @@ T1 → T2 → T3 → T4
 **Requirement:** FAUNA-04, FAUNA-05
 **Done when:**
 
-- [ ] Requisitos FAUNA-04/05 apontam para implementação real.
-- [ ] `flutter analyze` passa sem issues.
-- [ ] `flutter test` passa sem reduzir a contagem existente.
-- [ ] `flutter build apk --debug` passa.
-- [ ] Verificação independente é executada após o último commit.
+- [x] Requisitos FAUNA-04/05 apontam para implementação real.
+- [x] `flutter analyze` passa sem issues.
+- [x] `flutter test` passa sem reduzir a contagem existente.
+- [x] `flutter build apk --debug` passa.
+- [x] Verificação independente é executada após o último commit.
 
 **Tests:** none — documentação e gate de build
 **Gate:** build

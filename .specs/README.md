@@ -28,7 +28,7 @@ Ambiente validado: Flutter 3.44.7, Dart 3.12.2, Temurin JDK 17 e Android SDK/API
 
 ## Roadmap de produto planejado
 
-- [Fauna Social & Gamification](features/social-gamification-roadmap/spec.md) — grupos privados, regras de score, fauna, facções, ranking e mural; direção de produto, ainda não implementada.
+- [Fauna Social & Gamification](features/social-gamification-roadmap/spec.md) — grupos privados, regras de score, fauna, facções, ranking e mural; Fase 0 local entregue, social remoto pendente.
 - [Product Design](features/social-gamification-roadmap/design.md) — fluxo, telas, funções, contratos e riscos da experiência proposta.
 
 ## Estados usados

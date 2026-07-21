@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,6 +24,23 @@ ImportedWorkout workout() {
 }
 
 void main() {
+  testWidgets('shows loading while the Habitat rank is being resolved', (tester) async {
+    final completer = Completer<FaunaRank>();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          faunaProgressProvider.overrideWith((ref) => completer.future),
+          feedWorkoutsProvider.overrideWith((ref) async => const []),
+        ],
+        child: const MaterialApp(home: HabitatScreen()),
+      ),
+    );
+
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    completer.complete(const FaunaRank(tier: FaunaTier.rat, formPoints: 0, legacyPoints: 0, nextTier: FaunaTier.wolf, nextTierPoints: 1));
+    await tester.pumpAndSettle();
+  });
+
   testWidgets('shows mascot, progression and recent activity', (tester) async {
     const rank = FaunaRank(
       tier: FaunaTier.bear,
