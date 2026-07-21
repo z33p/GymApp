@@ -164,13 +164,12 @@ No HealthKit atual, calorias e distância são importadas quando disponíveis. F
 | --- | --- | --- | --- |
 | PROD-01 | Visão, usuário e problema | esta spec | Implementing |
 | PROD-02 | Capability map com estados reais | esta spec | Implementing |
-| PROD-03 | Importação e sync | `../workout-import-sync/spec.md` | Pending |
-| PROD-04 | Feed, histórico e detalhe | `../workout-catalog/spec.md` | Pending |
-| PROD-05 | Métricas de progresso | `../progress-insights/spec.md` | Pending |
-| PROD-06 | Dispositivos e integrações | `../device-integrations/spec.md` | Pending |
-| PROD-07 | Perfil e preferências | `../local-profile-settings/spec.md` | Pending |
-| PROD-08 | Dados, privacidade e ciclo de vida | `../local-data-lifecycle/spec.md` | Pending |
-| PROD-09 | Índice navegável de specs | `.specs/README.md` | Pending |
+| PROD-03 | Importação e sync | `../workout-import-sync/spec.md` | Implementing |
+| PROD-04 | Feed, histórico e detalhe | `../workout-catalog/spec.md` | Implementing |
+| PROD-05 | Métricas de progresso | `../progress-insights/spec.md` | Implementing |
+| PROD-06 | Dispositivos e integrações | `../device-integrations/spec.md` | Implementing |
+| PROD-07 | Perfil e preferências | `../local-profile-settings/spec.md` | Implementing |
+| PROD-08 | Dados, privacidade e ciclo de vida | `../local-data-lifecycle/spec.md` | Implementing |
+| PROD-09 | Índice navegável de specs | `.specs/README.md` | Implementing |
 
 **Coverage**: 9 requisitos, 9 mapeados, 0 sem destino.
-

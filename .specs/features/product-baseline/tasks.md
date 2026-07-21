@@ -5,7 +5,7 @@
 Executar com `tlc-spec-driven`, uma tarefa por vez, gate obrigatório e commit atômico. Esta feature possui 8 tarefas e cabe em um único batch inline.
 
 **Design**: `.specs/features/product-baseline/design.md`  
-**Status**: In Progress
+**Status**: Done — pending independent validation
 
 ## Test Coverage Matrix
 
@@ -135,3 +135,15 @@ T1 -> T2 -> T3 -> T4 -> T5 -> T6 -> T7 -> T8
 | T2–T7 | uma spec funcional por tarefa | Granular |
 | T8 | um índice e fechamento de links | Granular |
 
+## Execution Results
+
+| Task | Result | Commit |
+| --- | --- | --- |
+| T1 | Done | `92ffa15` |
+| T2 | Done | `56949b3` |
+| T3 | Done | `dda3fd5` |
+| T4 | Done | `ab5bff2` |
+| T5 | Done | `cb352e5` |
+| T6 | Done | `fc3bac6` |
+| T7 | Done | `a4e27c6` |
+| T8 | Done | commit de índice/rastreabilidade |
