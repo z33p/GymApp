@@ -111,7 +111,7 @@ void main() {
       ProviderScope(
         overrides: [
           authRepositoryProvider.overrideWithValue(auth),
-          currentUserProvider.overrideWith((ref) => auth.debugSignedIn ? auth.user : null),
+          currentUserProvider.overrideWith((ref) async => auth.debugSignedIn ? auth.user : null),
           bootstrapProvider.overrideWith((ref) async {}),
         ],
         child: const MaterialApp(home: AuthGate(child: Text('Habitat'))),
