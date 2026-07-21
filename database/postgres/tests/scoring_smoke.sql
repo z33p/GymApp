@@ -81,6 +81,9 @@ SELECT gymapp.moderate_comment(
 INSERT INTO group_posts (id, group_id, author_id, post_type, body) VALUES
   ('40000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000001',
    '10000000-0000-0000-0000-000000000002', 'conversation', 'Visible accountability post');
+INSERT INTO post_comments (id, post_id, author_id, body) VALUES
+  ('50000000-0000-0000-0000-000000000002', '40000000-0000-0000-0000-000000000002',
+   '10000000-0000-0000-0000-000000000001', 'Visible accountability comment');
 
 DO $$
 BEGIN
@@ -112,7 +115,7 @@ $$;
 CREATE ROLE gymapp_smoke_client NOLOGIN;
 GRANT gymapp_smoke_client TO CURRENT_USER;
 GRANT USAGE ON SCHEMA gymapp TO gymapp_smoke_client;
-GRANT SELECT ON gymapp.groups, gymapp.group_memberships, gymapp.group_posts TO gymapp_smoke_client;
+GRANT SELECT ON gymapp.groups, gymapp.group_memberships, gymapp.group_posts, gymapp.post_comments, gymapp.activity_claims TO gymapp_smoke_client;
 
 SET LOCAL ROLE gymapp_smoke_client;
 SELECT set_config('app.user_id', '10000000-0000-0000-0000-000000000001', true);
@@ -124,14 +127,35 @@ BEGIN
   IF (SELECT count(*) FROM gymapp.groups) <> 1 THEN
     RAISE EXCEPTION 'active member could not read own group';
   END IF;
+  IF (SELECT count(*) FROM gymapp.post_comments) <> 1 THEN
+    RAISE EXCEPTION 'active member could not read visible group comment';
+  END IF;
+  IF (SELECT count(*) FROM gymapp.activity_claims) <> 5 THEN
+    RAISE EXCEPTION 'active member could not read group claims';
+  END IF;
 END;
 $$;
 
 SELECT set_config('app.user_id', '10000000-0000-0000-0000-000000000099', true);
 DO $$
 BEGIN
-  IF (SELECT count(*) FROM gymapp.groups) <> 0 OR (SELECT count(*) FROM gymapp.group_posts) <> 0 THEN
+  IF (SELECT count(*) FROM gymapp.groups) <> 0
+     OR (SELECT count(*) FROM gymapp.group_posts) <> 0
+     OR (SELECT count(*) FROM gymapp.post_comments) <> 0
+     OR (SELECT count(*) FROM gymapp.activity_claims) <> 0 THEN
     RAISE EXCEPTION 'non-member can read private group content';
+  END IF;
+END;
+$$;
+
+SELECT set_config('app.user_id', '', true);
+DO $$
+BEGIN
+  IF (SELECT count(*) FROM gymapp.groups) <> 0
+     OR (SELECT count(*) FROM gymapp.group_posts) <> 0
+     OR (SELECT count(*) FROM gymapp.post_comments) <> 0
+     OR (SELECT count(*) FROM gymapp.activity_claims) <> 0 THEN
+    RAISE EXCEPTION 'anonymous session can read private group content';
   END IF;
 END;
 $$;

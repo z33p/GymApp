@@ -7,6 +7,7 @@ Este diretório contém somente dados compartilhados: identidade, grupos, tempor
 - PostgreSQL **15+** e cliente `psql` no `PATH`.
 - Uma base vazia ou dedicada ao GymApp.
 - Uma URL semitada, por exemplo `postgresql://gymapp:senha@localhost:5432/gymapp`.
+- Para o smoke test completo de RLS, uma credencial de desenvolvimento com `CREATEROLE`; o teste cria um papel `NOLOGIN` e o descarta com `ROLLBACK`.
 
 Não registre `DATABASE_URL` com senha no Git. A API autenticada deve executar `SET LOCAL app.user_id = '<uuid-do-perfil>'` no começo de toda transação de cliente. Migrations e operações administrativas devem usar uma credencial separada, nunca exposta ao app Flutter.
 

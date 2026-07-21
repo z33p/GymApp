@@ -315,8 +315,7 @@ USING (gymapp.is_active_member(group_id, gymapp.current_user_id()));
 
 CREATE POLICY claims_read_member ON gymapp.activity_claims FOR SELECT
 USING (
-  user_id = gymapp.current_user_id()
-  OR EXISTS (
+  EXISTS (
     SELECT 1 FROM gymapp.group_seasons seasons
     WHERE seasons.id = gymapp.activity_claims.season_id
       AND gymapp.is_active_member(seasons.group_id, gymapp.current_user_id())
