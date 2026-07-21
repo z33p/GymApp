@@ -141,6 +141,6 @@ Como membro, quero metas curtas além do ranking para voltar ao app durante a se
 | FAUNA-05 | Mascote visível no Home, perfil e ranking | P1 | Implemented partially — Habitat/Home nesta fase |
 | FAUNA-06 | Grupos privados e ranking de temporada | P1 | Partial — schema remoto preparado; feature pending |
 | FAUNA-07 | Mural, posts, reações, comentários e moderação básica | P1 | Pending |
-| FAUNA-08 | Login social e banner de conexão não bloqueante | P2 | Pending |
+| FAUNA-08 | Login social e banner de conexão não bloqueante | P2 | Partial — login visual/debug; OAuth e onboarding pending |
 | FAUNA-09 | Missões e encerramento de temporada | P2 | Pending |
 | FAUNA-10 | Guerra global entre facções | P3 | Pending |

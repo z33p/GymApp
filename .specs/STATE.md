@@ -66,12 +66,23 @@
 - **Date**: 2026-07-21
 - **Status**: active
 
+### AD-009
+- **Decision**: O login do app usa um contrato de domínio com adaptadores substituíveis; o modo debug local é explícito e disponível somente em builds de desenvolvimento.
+- **Reason**: Permite validar a UX agora sem acoplar o Flutter a Google, Microsoft, Apple ou a um backend ainda não escolhido.
+- **Trade-off**: Provedores externos permanecem não configurados até a decisão de auth/backend e os fluxos OAuth/deep link serem implementados.
+- **Scope**: Sessão, tela de login e futuras integrações de identidade.
+- **Date**: 2026-07-21
+- **Status**: active
+
 ## Handoff
 
 - **Current feature**: PostgreSQL Social Schema / `.specs/features/postgres-social-schema/spec.md`
 - **Current status**: Complete — independent static validation PASS; migrations and runtime smoke still need PostgreSQL 15+ on a machine with `psql`.
 - **Next step**: choose host/auth, then execute `database/postgres/scripts/verify_postgres_schema.ps1` before integrating Flutter.
 - **Runtime blocker**: this Windows machine has no psql, Docker or WSL configured.
+
+- **Current feature**: Auth Login & Debug Mode / `.specs/features/auth-login-debug/spec.md`
+- **Current status**: contrato, tela, AuthGate e modo debug concluídos; validação independente pendente.
 
 - **Feature**: Product baseline / `.specs/features/product-baseline/spec.md`
 - **Phase / Task**: Complete — segunda validação independente PASS

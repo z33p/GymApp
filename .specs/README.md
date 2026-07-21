@@ -17,6 +17,7 @@ Este diretório é a fonte de verdade para comportamento, decisões e validaçã
 | Progresso | [Progress Insights](features/progress-insights/spec.md) | Totais semanais/mensais, duração, calorias, distância e streak | Implementado |
 | Dispositivos | [Device Integrations](features/device-integrations/spec.md) | Apple Health, preview, permissões, Health Connect e Garmin | Apple Health/preview implementados; demais planejados |
 | Perfil e preferências | [Local Profile & Settings](features/local-profile-settings/spec.md) | Usuário mock, tema, unidade e limpeza | Parcial: conversão imperial não implementada |
+| Login e sessão | [Auth Login & Debug Mode](features/auth-login-debug/spec.md) | Login visual, contrato de provedores e modo debug | Parcial: debug implementado; OAuth externo pendente |
 | Dados e privacidade | [Local Data Lifecycle & Privacy](features/local-data-lifecycle/spec.md) | SQLite, SharedPreferences, retenção, schema inativo e local-only | Implementado conforme baseline |
 
 ## Baseline técnico
@@ -57,6 +58,7 @@ Ambiente validado: Flutter 3.44.7, Dart 3.12.2, Temurin JDK 17 e Android SDK/API
 - Tema persistente e limpeza local.
 - Fauna Foundation: tiers, Forma/Legado local, mascote e Habitat/Home.
 - Migrations PostgreSQL para identidade, grupos, temporadas, claims, ranking, mural, moderação e RLS.
+- Login visual com portas para Google, Microsoft e Apple, além de entrada explícita em modo debug.
 
 ### Parcial ou limitado
 
@@ -70,7 +72,7 @@ Ambiente validado: Flutter 3.44.7, Dart 3.12.2, Temurin JDK 17 e Android SDK/API
 
 - Health Connect.
 - Garmin.
-- Autenticação real e API/backend conectado.
+- OAuth real e API/backend conectado.
 - Sincronização em nuvem e integração Flutter com PostgreSQL.
 - Criação manual de workouts.
 - Experiência social/check-ins.

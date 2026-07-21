@@ -73,9 +73,12 @@ final currentUserProvider = FutureProvider<AppUser?>((ref) async {
 
 final bootstrapProvider = FutureProvider<void>((ref) async {
   final authRepository = ref.watch(authRepositoryProvider);
-  await authRepository.ensureMockUser();
+  final user = await authRepository.getCurrentUser();
   ref.invalidate(currentUserProvider);
   ref.read(bootstrapSyncWarningProvider.notifier).state = null;
+  if (user == null) {
+    return;
+  }
   try {
     await ref.watch(fitnessImportRepositoryProvider).sync(FitnessProviderType.appleHealth);
   } catch (error, stackTrace) {
@@ -152,7 +155,6 @@ class SyncController extends AsyncNotifier<void> {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       await ref.read(appDatabaseProvider).clearAllData();
-      await ref.read(authRepositoryProvider).ensureMockUser();
       ref.read(refreshTickerProvider.notifier).state++;
     });
   }

@@ -19,7 +19,7 @@ O MVP precisa de uma identidade local mínima e preferências de aparência sem 
 
 | Item | Motivo |
 | --- | --- |
-| Login, cadastro, logout e token | Não existe backend/auth remota |
+| OAuth, cadastro remoto, logout e token | Backend/auth remota ainda não existe; há login visual e modo debug local em spec própria |
 | Editar nome, username ou avatar | Perfil é fixo e somente leitura |
 | Múltiplos usuários | `getCurrentUser` retorna a primeira linha e bootstrap usa ID fixo |
 | Backup/sync das preferências | SharedPreferences é local |
@@ -126,4 +126,3 @@ A limpeza não remove `theme_preference` nem `units_preference`, pois SharedPref
 | SET-06 | Limitações de UX/erro explícitas | esta spec | Documented |
 
 **Open questions**: nenhuma para o baseline. Confirmação de limpeza, conversão imperial e autenticação real requerem novas decisões/specs.
-
