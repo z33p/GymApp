@@ -6,7 +6,7 @@ Permitir que o GymApp seja preparado e executado em um Mac com Xcode, simulador 
 
 ## Requisitos
 
-- **IOS-01 — AppIcon válido:** `Contents.json` referencia PNGs existentes, não vazios, com dimensões `size × scale`; o marketing icon é 1024×1024 e não possui transparência.
+- **IOS-01 — Catálogo de assets válido:** `AppIcon` e `LaunchImage` referenciam PNGs existentes, não vazios e com assinatura válida; os ícones têm dimensões `size × scale`, e o marketing icon é 1024×1024 sem transparência.
 - **IOS-02 — Asset catalog ligado:** Debug, Profile e Release usam `ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon`.
 - **IOS-03 — CocoaPods:** `ios/Podfile` usa os modos Flutter Debug/Profile/Release e instala os pods Flutter com deployment target iOS 13.
 - **IOS-04 — Identidade e permissões:** `Info.plist` define GymApp, bundle identifier por build setting e mensagens HealthKit; entitlements declara HealthKit.

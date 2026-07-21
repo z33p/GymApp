@@ -2,7 +2,7 @@
 
 ## Windows
 
-- AppIcon: 15 PNGs restaurados do template oficial Flutter; todos têm conteúdo e dimensões de catálogo.
+- Assets: 15 PNGs do AppIcon e 3 PNGs do LaunchImage restaurados do template oficial Flutter; todos têm conteúdo e assinatura PNG válida, com dimensões de catálogo conferidas no AppIcon.
 - Xcode: `AppIcon` está referenciado nos perfis de build e o bundle identifier é `com.z33p.gymapp`.
 - CocoaPods: `ios/Podfile` adicionado com `flutter_install_all_ios_pods` e deployment target 13.0.
 - Permissões: `Info.plist` contém descrições HealthKit e `Runner.entitlements` declara HealthKit.
