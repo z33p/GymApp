@@ -42,6 +42,14 @@
 - **Date**: 2026-07-21
 - **Status**: active
 
+### AD-006
+- **Decision**: Evoluir o GymApp de local-first para offline-first quando grupos e gamificação social forem implementados: dados pessoais de treino continuam locais, enquanto identidade, grupos, ranking e mural exigem sincronização remota.
+- **Reason**: O produto precisa de ranking e comunidade consistentes entre aparelhos, sem perder o valor do histórico individual quando estiver offline.
+- **Trade-off**: A próxima fase exigirá escolha explícita de backend, autenticação, regras de autorização e estratégia de conflito; nenhuma dessas decisões é inferida neste roadmap.
+- **Scope**: Features futuras de identidade, grupos, ranking, facções e social.
+- **Date**: 2026-07-21
+- **Status**: active
+
 ## Handoff
 
 - **Feature**: Product baseline / `.specs/features/product-baseline/spec.md`
@@ -51,5 +59,6 @@
 - **Next step**: usar `.specs/README.md` e a spec do domínio como ponto de partida da próxima feature
 - **Blockers**: nenhum
 - **iOS readiness**: AppIcon vazio corrigido; Podfile, atalhos VS Code e gate macOS documentados.
+- **Product roadmap**: Fauna Social & Gamification desenhado; aguarda autorização para plano técnico e implementação.
 - **Uncommitted files**: nenhum após o commit final de validação
 - **Branch**: master

@@ -26,6 +26,11 @@ Este diretório é a fonte de verdade para comportamento, decisões e validaçã
 
 Ambiente validado: Flutter 3.44.7, Dart 3.12.2, Temurin JDK 17 e Android SDK/API 36.
 
+## Roadmap de produto planejado
+
+- [Fauna Social & Gamification](features/social-gamification-roadmap/spec.md) — grupos privados, regras de score, fauna, facções, ranking e mural; direção de produto, ainda não implementada.
+- [Product Design](features/social-gamification-roadmap/design.md) — fluxo, telas, funções, contratos e riscos da experiência proposta.
+
 ## Estados usados
 
 | Estado | Significado |
@@ -84,4 +89,3 @@ Specs registram duas formas de evidência separadas:
 - **Cobertura automatizada**: teste e assertions existentes.
 
 Ausência de teste não é mascarada como cobertura. O baseline pode documentar comportamento comprovado por leitura de código e, ao mesmo tempo, registrar a lacuna que uma feature futura deverá fechar.
-
