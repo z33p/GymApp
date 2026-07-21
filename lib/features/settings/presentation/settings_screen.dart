@@ -33,7 +33,7 @@ class SettingsScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     DropdownButtonFormField<AppThemePreference>(
-                      value: value.themePreference,
+                      initialValue: value.themePreference,
                       decoration: const InputDecoration(labelText: 'Theme'),
                       items: AppThemePreference.values
                           .map((theme) => DropdownMenuItem(value: theme, child: Text(theme.name)))
@@ -46,7 +46,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 12),
                     DropdownButtonFormField<AppUnits>(
-                      value: value.units,
+                      initialValue: value.units,
                       decoration: const InputDecoration(labelText: 'Units'),
                       items: AppUnits.values
                           .map((units) => DropdownMenuItem(value: units, child: Text(units.name)))

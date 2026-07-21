@@ -30,7 +30,7 @@ class LocalWorkoutDataSource {
       }
       if (filters.query.trim().isNotEmpty) {
         final query = '%${filters.query.trim().toLowerCase()}%';
-        whereClauses.add('(LOWER(activity_type) LIKE ? OR LOWER(COALESCE(source_name, \"\")) LIKE ?)');
+        whereClauses.add("(LOWER(activity_type) LIKE ? OR LOWER(COALESCE(source_name, '')) LIKE ?)");
         args.addAll([query, query]);
       }
     }

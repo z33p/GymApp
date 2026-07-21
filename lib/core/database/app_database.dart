@@ -9,7 +9,7 @@ class AppDatabase {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    final path = p.join(await getDatabasesPath(), 'gym_app.db');
+    final path = p.join(await _factory.getDatabasesPath(), 'gym_app.db');
     _database = await _factory.openDatabase(
       path,
       options: OpenDatabaseOptions(

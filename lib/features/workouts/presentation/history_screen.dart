@@ -39,7 +39,7 @@ class HistoryScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: DropdownButtonFormField<String?>(
-                        value: filters.activityType,
+                        initialValue: filters.activityType,
                         hint: const Text('Activity'),
                         items: [
                           const DropdownMenuItem<String?>(value: null, child: Text('All activities')),
@@ -61,7 +61,7 @@ class HistoryScreen extends ConsumerWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: DropdownButtonFormField<String?>(
-                        value: filters.sourceName,
+                        initialValue: filters.sourceName,
                         hint: const Text('Source'),
                         items: [
                           const DropdownMenuItem<String?>(value: null, child: Text('All sources')),
