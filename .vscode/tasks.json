@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "Flutter: Pub Get", "type": "process", "command": "flutter", "args": ["pub", "get"], "problemMatcher": []},
+    {"label": "Flutter: Analyze", "type": "process", "command": "flutter", "args": ["analyze"], "problemMatcher": "$dart-analyze"},
+    {"label": "Flutter: Test", "type": "process", "command": "flutter", "args": ["test"], "problemMatcher": []},
+    {"label": "iOS: Prepare", "dependsOrder": "sequence", "dependsOn": ["Flutter: Pub Get", "iOS: CocoaPods Install"]},
+    {"label": "iOS: CocoaPods Install", "type": "shell", "command": "pod install", "options": {"cwd": "${workspaceFolder}/ios"}, "problemMatcher": []},
+    {"label": "iOS: Open Workspace", "type": "shell", "command": "open ios/Runner.xcworkspace", "problemMatcher": []}
+  ]
+}

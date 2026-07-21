@@ -50,5 +50,6 @@
 - **In-progress** (file:line): nenhum
 - **Next step**: usar `.specs/README.md` e a spec do domínio como ponto de partida da próxima feature
 - **Blockers**: nenhum
+- **iOS readiness**: AppIcon vazio corrigido; Podfile, atalhos VS Code e gate macOS documentados.
 - **Uncommitted files**: nenhum após o commit final de validação
 - **Branch**: master
