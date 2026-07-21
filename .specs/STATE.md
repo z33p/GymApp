@@ -37,10 +37,10 @@
 ## Handoff
 
 - **Feature**: Baseline de desenvolvimento / `.specs/features/development-environment/spec.md`
-- **Phase / Task**: Execute — validação independente pendente
-- **Completed**: configuração Flutter/JDK/Android, dependências, correções de compatibilidade, analyzer, testes, build APK, spec
+- **Phase / Task**: Complete — validação independente PASS
+- **Completed**: ENV-01 a ENV-08; configuração Flutter/JDK/Android, dependências, correções de compatibilidade, analyzer, 3 testes, build APK, spec e validation
 - **In-progress** (file:line): nenhum
-- **Next step**: executar o Verifier, persistir `validation.md` e então aguardar a próxima feature solicitada pelo usuário
+- **Next step**: aguardar a próxima feature solicitada pelo usuário e iniciar a fase Specify
 - **Blockers**: nenhum
-- **Uncommitted files**: `pubspec.lock`, quatro arquivos Dart, `.specs/STATE.md`, `.specs/features/development-environment/spec.md`
+- **Uncommitted files**: nenhum após o commit de validação
 - **Branch**: master

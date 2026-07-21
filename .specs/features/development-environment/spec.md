@@ -121,14 +121,14 @@ O GymApp não possuía uma baseline reproduzível de dependências nem um regist
 
 | Requirement ID | Story | Evidence / gate | Status |
 | --- | --- | --- | --- |
-| ENV-01 | P1: Ambiente reproduzível | `flutter --version` | Implementing |
-| ENV-02 | P1: Ambiente reproduzível | `flutter doctor -v` | Implementing |
-| ENV-03 | P1: Ambiente reproduzível | `flutter pub get`, `pubspec.lock` | Implementing |
-| ENV-04 | P1: Baseline verificável | `flutter analyze` | Implementing |
-| ENV-05 | P1: Baseline verificável | `flutter test` | Implementing |
-| ENV-06 | P1: Baseline verificável | `flutter build apk --debug` | Implementing |
-| ENV-07 | P1: Baseline verificável | `test/local_workout_upsert_test.dart` | Implementing |
-| ENV-08 | P2: Contexto persistente | `.specs/STATE.md`, esta especificação | Implementing |
+| ENV-01 | P1: Ambiente reproduzível | `flutter --version` | Verified |
+| ENV-02 | P1: Ambiente reproduzível | `flutter doctor -v` | Verified |
+| ENV-03 | P1: Ambiente reproduzível | `flutter pub get`, `pubspec.lock` | Verified |
+| ENV-04 | P1: Baseline verificável | `flutter analyze` | Verified |
+| ENV-05 | P1: Baseline verificável | `flutter test` | Verified |
+| ENV-06 | P1: Baseline verificável | `flutter build apk --debug` | Verified |
+| ENV-07 | P1: Baseline verificável | `test/local_workout_upsert_test.dart` | Verified |
+| ENV-08 | P2: Contexto persistente | `.specs/STATE.md`, esta especificação | Verified |
 
 **Coverage:** 8 requisitos, 8 mapeados a evidências, 0 não mapeados.
 
