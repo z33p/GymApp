@@ -17,6 +17,7 @@ import '../../features/devices/domain/fitness_provider.dart';
 import '../../features/devices/domain/sync_state.dart';
 import '../../features/devices/domain/sync_state_repository.dart';
 import '../../features/progress/domain/workout_progress_stats.dart';
+import '../../features/gamification/domain/fauna_rank.dart';
 import '../../features/workouts/data/local_workout_data_source.dart';
 import '../../features/workouts/data/local_workout_repository.dart';
 import '../../features/workouts/domain/imported_workout.dart';
@@ -28,6 +29,7 @@ import 'app_settings.dart';
 
 final appDatabaseProvider = Provider<AppDatabase>((ref) => AppDatabase());
 final workoutStatsCalculatorProvider = Provider<WorkoutStatsCalculator>((ref) => const WorkoutStatsCalculator());
+final faunaRankCalculatorProvider = Provider<FaunaRankCalculator>((ref) => const FaunaRankCalculator());
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return LocalAuthRepository(ref.watch(appDatabaseProvider), const MockAuthDataSource());
@@ -119,6 +121,11 @@ final deviceConnectionProvider = FutureProvider.family<DeviceConnectionInfo, Fit
 final progressStatsProvider = FutureProvider<WorkoutProgressStats>((ref) async {
   final workouts = await ref.watch(allWorkoutsProvider.future);
   return ref.watch(workoutStatsCalculatorProvider).calculate(workouts);
+});
+
+final faunaProgressProvider = FutureProvider<FaunaRank>((ref) async {
+  final workouts = await ref.watch(allWorkoutsProvider.future);
+  return ref.watch(faunaRankCalculatorProvider).calculate(workouts);
 });
 
 class SyncController extends AsyncNotifier<void> {

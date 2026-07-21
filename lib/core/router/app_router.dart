@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/devices/presentation/devices_screen.dart';
 import '../../features/feed/presentation/feed_screen.dart';
+import '../../features/gamification/presentation/habitat_screen.dart';
 import '../../features/progress/presentation/progress_screen.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/workouts/presentation/history_screen.dart';
@@ -14,11 +15,12 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 GoRouter createRouter() {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/feed',
+    initialLocation: '/home',
     routes: [
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         routes: [
+          GoRoute(path: '/home', builder: (_, __) => const HabitatScreen()),
           GoRoute(path: '/feed', builder: (_, __) => const FeedScreen()),
           GoRoute(path: '/history', builder: (_, __) => const HistoryScreen()),
           GoRoute(path: '/progress', builder: (_, __) => const ProgressScreen()),
