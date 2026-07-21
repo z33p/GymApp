@@ -15,3 +15,15 @@ GymApp is a Flutter mobile MVP focused on automatically importing workouts that 
 - iOS reads from Apple Health through `com.gymapp.health/apple_health`.
 - Unsupported platforms and iOS simulator fall back to preview workout data.
 - Android is structured for future Health Connect and Garmin integrations.
+
+## Preparar iOS no macOS
+
+Depois de clonar o repositório, execute:
+
+```bash
+cd GymApp
+chmod +x scripts/setup_ios_macos.sh
+./scripts/setup_ios_macos.sh --open
+```
+
+O script verifica Flutter, Xcode Command Line Tools e CocoaPods, executa `flutter pub get`, instala os pods e valida o workspace. Use `--clean` para limpar o build antes da preparação. O desenvolvimento pode continuar no VS Code; o Xcode só precisa estar instalado para fornecer o toolchain e o simulador.
