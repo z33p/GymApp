@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/config/app_providers.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'features/auth/presentation/auth_gate.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +56,7 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
       routerConfig: router,
       builder: (context, child) {
         final content = bootstrap.when(
-          data: (_) => child ?? const SizedBox.shrink(),
+          data: (_) => AuthGate(child: child ?? const SizedBox.shrink()),
           error: (error, _) => Material(
             child: Center(
               child: Padding(
