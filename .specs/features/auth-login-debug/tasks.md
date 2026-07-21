@@ -14,4 +14,4 @@
 2. Login screen and AuthGate — commit `feat(auth): add visual login and debug mode`.
 3. Bootstrap integration, specs and full gates — commit `docs(auth): validate login debug flow`.
 
-**Status:** T1 and T2 implemented; T3 static validation pending because Flutter is not on this shell PATH.
+**Status:** Complete — static validation PASS; Flutter runtime gate pending because Flutter is not on this shell PATH.

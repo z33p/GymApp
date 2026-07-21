@@ -82,7 +82,7 @@
 - **Runtime blocker**: this Windows machine has no psql, Docker or WSL configured.
 
 - **Current feature**: Auth Login & Debug Mode / `.specs/features/auth-login-debug/spec.md`
-- **Current status**: contrato, tela, AuthGate e modo debug concluídos; validação independente pendente.
+- **Current status**: contrato, tela, AuthGate e modo debug concluídos; validação independente PASS estático; Flutter runtime gate pendente nesta sessão.
 
 - **Feature**: Product baseline / `.specs/features/product-baseline/spec.md`
 - **Phase / Task**: Complete — segunda validação independente PASS
