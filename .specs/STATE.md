@@ -34,13 +34,21 @@
 - **Date**: 2026-07-21
 - **Status**: active
 
+### AD-005
+- **Decision**: Manter uma spec canônica de produto e specs separadas por domínio funcional, com estados explícitos para implementado, parcial, preview, planejado e fora do MVP.
+- **Reason**: A estrutura preserva a rastreabilidade do baseline sem confundir placeholders ou intenção de roadmap com capacidades entregues.
+- **Trade-off**: Mudanças de comportamento devem atualizar a spec do domínio e o índice, além da implementação.
+- **Scope**: Toda evolução funcional e documentação de produto em `.specs/`.
+- **Date**: 2026-07-21
+- **Status**: active
+
 ## Handoff
 
-- **Feature**: Baseline de desenvolvimento / `.specs/features/development-environment/spec.md`
-- **Phase / Task**: Complete — validação independente PASS
-- **Completed**: ENV-01 a ENV-08; configuração Flutter/JDK/Android, dependências, correções de compatibilidade, analyzer, 3 testes, build APK, spec e validation
+- **Feature**: Product baseline / `.specs/features/product-baseline/spec.md`
+- **Phase / Task**: Complete — segunda validação independente PASS
+- **Completed**: PROD-01 a PROD-09; visão canônica, seis specs funcionais, índice, gates, links e sensor
 - **In-progress** (file:line): nenhum
-- **Next step**: aguardar a próxima feature solicitada pelo usuário e iniciar a fase Specify
+- **Next step**: usar `.specs/README.md` e a spec do domínio como ponto de partida da próxima feature
 - **Blockers**: nenhum
-- **Uncommitted files**: nenhum após o commit de validação
+- **Uncommitted files**: nenhum após o commit final de validação
 - **Branch**: master

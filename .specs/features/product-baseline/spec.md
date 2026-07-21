@@ -162,14 +162,14 @@ No HealthKit atual, calorias e distância são importadas quando disponíveis. F
 
 | ID | Resultado documentado | Spec detalhada | Status da documentação |
 | --- | --- | --- | --- |
-| PROD-01 | Visão, usuário e problema | esta spec | Implementing |
-| PROD-02 | Capability map com estados reais | esta spec | Implementing |
-| PROD-03 | Importação e sync | `../workout-import-sync/spec.md` | Implementing |
-| PROD-04 | Feed, histórico e detalhe | `../workout-catalog/spec.md` | Implementing |
-| PROD-05 | Métricas de progresso | `../progress-insights/spec.md` | Implementing |
-| PROD-06 | Dispositivos e integrações | `../device-integrations/spec.md` | Implementing |
-| PROD-07 | Perfil e preferências | `../local-profile-settings/spec.md` | Implementing |
-| PROD-08 | Dados, privacidade e ciclo de vida | `../local-data-lifecycle/spec.md` | Implementing |
-| PROD-09 | Índice navegável de specs | `.specs/README.md` | Implementing |
+| PROD-01 | Visão, usuário e problema | esta spec | Verified |
+| PROD-02 | Capability map com estados reais | esta spec | Verified |
+| PROD-03 | Importação e sync | `../workout-import-sync/spec.md` | Verified |
+| PROD-04 | Feed, histórico e detalhe | `../workout-catalog/spec.md` | Verified |
+| PROD-05 | Métricas de progresso | `../progress-insights/spec.md` | Verified |
+| PROD-06 | Dispositivos e integrações | `../device-integrations/spec.md` | Verified |
+| PROD-07 | Perfil e preferências | `../local-profile-settings/spec.md` | Verified |
+| PROD-08 | Dados, privacidade e ciclo de vida | `../local-data-lifecycle/spec.md` | Verified |
+| PROD-09 | Índice navegável de specs | `.specs/README.md` | Verified |
 
 **Coverage**: 9 requisitos, 9 mapeados, 0 sem destino.

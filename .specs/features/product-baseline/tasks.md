@@ -146,4 +146,4 @@ T1 -> T2 -> T3 -> T4 -> T5 -> T6 -> T7 -> T8
 | T5 | Done | `cb352e5` |
 | T6 | Done | `fc3bac6` |
 | T7 | Done | `a4e27c6` |
-| T8 | Done | commit de índice/rastreabilidade |
+| T8 | Done | `e96104f` |
