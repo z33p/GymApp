@@ -5,8 +5,8 @@
 | Layer | Required verification | Location | Gate |
 | --- | --- | --- | --- |
 | DDL base | Apply on empty PostgreSQL | `database/postgres/migrations` | `apply_postgres_migrations` |
-| Scoring trigger | Minimum, cap, daily limit, source and duplicate cases | `database/postgres/tests/schema_smoke.sql` | `verify_postgres_schema` |
-| RLS | Session can see only own private group | `database/postgres/tests/schema_smoke.sql` | `verify_postgres_schema` |
+| Scoring trigger | Minimum, cap, daily limit, source and duplicate cases | `database/postgres/tests/scoring_smoke.sql` | `verify_postgres_schema` |
+| RLS | Session can see only own private group | `database/postgres/tests/scoring_smoke.sql` | `verify_postgres_schema` |
 | Scripts | Windows and POSIX syntax/help | `database/postgres/scripts` | PowerShell parser / `bash -n` |
 
 ## Tasks

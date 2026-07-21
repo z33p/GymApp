@@ -190,6 +190,80 @@ CREATE TRIGGER group_moderation_actions_validate_before_insert
 BEFORE INSERT ON gymapp.group_moderation_actions
 FOR EACH ROW EXECUTE FUNCTION gymapp.ensure_moderation_actor();
 
+CREATE OR REPLACE FUNCTION gymapp.moderate_post(
+  target_post_id uuid,
+  acting_moderator_id uuid,
+  moderation_action text,
+  moderation_reason text DEFAULT NULL
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  target_group_id uuid;
+BEGIN
+  SELECT group_id INTO target_group_id FROM gymapp.group_posts WHERE id = target_post_id FOR UPDATE;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'post % does not exist', target_post_id USING ERRCODE = 'foreign_key_violation';
+  END IF;
+  IF moderation_action NOT IN ('remove', 'restore', 'pin', 'unpin') THEN
+    RAISE EXCEPTION 'unsupported post moderation action %', moderation_action USING ERRCODE = 'check_violation';
+  END IF;
+  IF NOT gymapp.is_group_moderator(target_group_id, acting_moderator_id) THEN
+    RAISE EXCEPTION 'moderation actor must be an active owner or moderator' USING ERRCODE = 'foreign_key_violation';
+  END IF;
+
+  IF moderation_action = 'remove' THEN
+    UPDATE gymapp.group_posts SET removed_at = now(), removed_by = acting_moderator_id WHERE id = target_post_id;
+  ELSIF moderation_action = 'restore' THEN
+    UPDATE gymapp.group_posts SET removed_at = NULL, removed_by = NULL WHERE id = target_post_id;
+  ELSIF moderation_action = 'pin' THEN
+    UPDATE gymapp.group_posts SET pinned_at = now(), pinned_by = acting_moderator_id WHERE id = target_post_id;
+  ELSE
+    UPDATE gymapp.group_posts SET pinned_at = NULL, pinned_by = NULL WHERE id = target_post_id;
+  END IF;
+
+  INSERT INTO gymapp.group_moderation_actions (group_id, moderator_id, target_post_id, action, reason)
+  VALUES (target_group_id, acting_moderator_id, target_post_id, moderation_action, moderation_reason);
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION gymapp.moderate_comment(
+  target_comment_id uuid,
+  acting_moderator_id uuid,
+  moderation_action text,
+  moderation_reason text DEFAULT NULL
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  target_group_id uuid;
+BEGIN
+  SELECT posts.group_id INTO target_group_id
+  FROM gymapp.post_comments comments JOIN gymapp.group_posts posts ON posts.id = comments.post_id
+  WHERE comments.id = target_comment_id FOR UPDATE OF comments;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'comment % does not exist', target_comment_id USING ERRCODE = 'foreign_key_violation';
+  END IF;
+  IF moderation_action NOT IN ('remove', 'restore') THEN
+    RAISE EXCEPTION 'unsupported comment moderation action %', moderation_action USING ERRCODE = 'check_violation';
+  END IF;
+  IF NOT gymapp.is_group_moderator(target_group_id, acting_moderator_id) THEN
+    RAISE EXCEPTION 'moderation actor must be an active owner or moderator' USING ERRCODE = 'foreign_key_violation';
+  END IF;
+
+  IF moderation_action = 'remove' THEN
+    UPDATE gymapp.post_comments SET removed_at = now(), removed_by = acting_moderator_id WHERE id = target_comment_id;
+  ELSE
+    UPDATE gymapp.post_comments SET removed_at = NULL, removed_by = NULL WHERE id = target_comment_id;
+  END IF;
+
+  INSERT INTO gymapp.group_moderation_actions (group_id, moderator_id, target_comment_id, action, reason)
+  VALUES (target_group_id, acting_moderator_id, target_comment_id, moderation_action, moderation_reason);
+END;
+$$;
+
 CREATE OR REPLACE FUNCTION gymapp.shares_active_group(target_user_id uuid)
 RETURNS boolean
 LANGUAGE sql

@@ -9,7 +9,7 @@ if ([string]::IsNullOrWhiteSpace($DatabaseUrl)) {
 }
 
 $psql = Get-Command psql -ErrorAction Stop
-$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+$root = Split-Path -Parent $PSScriptRoot
 $migrations = Join-Path $root 'migrations'
 
 & $psql.Source --dbname=$DatabaseUrl --set ON_ERROR_STOP=1 --command 'CREATE SCHEMA IF NOT EXISTS gymapp; CREATE TABLE IF NOT EXISTS gymapp.schema_migrations (name text PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now());'
