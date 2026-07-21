@@ -43,3 +43,7 @@ O script detecta Flutter, JDK 17 e Android SDK, executa `flutter pub get`, anál
 flutter devices
 .\scripts\setup_android_windows.ps1 -Device <device-id>
 ```
+
+## Banco social remoto (PostgreSQL)
+
+Os dados compartilhados de identidade, grupos, ranking e mural usam migrations PostgreSQL; workouts importados e cache pessoal continuam no SQLite local. Veja instruções de aplicação e teste em [database/postgres/README.md](database/postgres/README.md).

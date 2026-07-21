@@ -57,4 +57,35 @@ BEGIN
 END;
 $$;
 
+INSERT INTO group_posts (id, group_id, author_id, post_type, activity_claim_id) VALUES
+  ('40000000-0000-0000-0000-000000000001', '20000000-0000-0000-0000-000000000001',
+   '10000000-0000-0000-0000-000000000002', 'activity',
+   (SELECT id FROM activity_claims WHERE source_reference = 'capped'));
+INSERT INTO post_comments (id, post_id, author_id, body) VALUES
+  ('50000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001',
+   '10000000-0000-0000-0000-000000000001', 'Nice work');
+INSERT INTO post_reactions (post_id, user_id, reaction) VALUES
+  ('40000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'fire');
+INSERT INTO group_moderation_actions (group_id, moderator_id, target_post_id, action, reason) VALUES
+  ('20000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001',
+   '40000000-0000-0000-0000-000000000001', 'pin', 'Featured effort');
+
+DO $$
+BEGIN
+  IF (SELECT count(*) FROM post_comments WHERE post_id = '40000000-0000-0000-0000-000000000001') <> 1 THEN
+    RAISE EXCEPTION 'comment relation was not created';
+  END IF;
+  IF (SELECT count(*) FROM post_reactions WHERE post_id = '40000000-0000-0000-0000-000000000001') <> 1 THEN
+    RAISE EXCEPTION 'reaction uniqueness relation was not created';
+  END IF;
+  IF (SELECT count(*) FROM pg_policies WHERE schemaname = 'gymapp') < 18 THEN
+    RAISE EXCEPTION 'expected row-level security policies are missing';
+  END IF;
+  IF (SELECT count(*) FROM pg_class tables JOIN pg_namespace namespaces ON namespaces.oid = tables.relnamespace
+      WHERE namespaces.nspname = 'gymapp' AND tables.relkind = 'r' AND tables.relrowsecurity) < 13 THEN
+    RAISE EXCEPTION 'expected row-level security is not enabled on all remote tables';
+  END IF;
+END;
+$$;
+
 ROLLBACK;
