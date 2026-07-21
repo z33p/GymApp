@@ -22,8 +22,13 @@ class LocalAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<AppUser> ensureMockUser() async {
+  Future<AppUser> signInDebug() async {
     final db = await _database.database;
     return _dataSource.ensureUser(db);
+  }
+
+  @override
+  Future<void> signInWith(AuthProvider provider) async {
+    throw AuthProviderNotConfiguredException(provider);
   }
 }
