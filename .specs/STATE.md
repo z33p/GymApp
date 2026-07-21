@@ -58,6 +58,14 @@
 - **Date**: 2026-07-21
 - **Status**: active
 
+### AD-008
+- **Decision**: Toda implementação deve encerrar atualizando a spec afetada, validação independente, capability snapshot em `.specs/README.md` e o handoff em `STATE.md`.
+- **Reason**: Evita que o documento de features faltantes fique divergente do código entregue.
+- **Trade-off**: Cada feature terá uma etapa documental explícita antes do commit final.
+- **Scope**: Todas as mudanças futuras do GymApp.
+- **Date**: 2026-07-21
+- **Status**: active
+
 ## Handoff
 
 - **Current feature**: PostgreSQL Social Schema / `.specs/features/postgres-social-schema/spec.md`

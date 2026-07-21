@@ -1,6 +1,6 @@
 # Fauna Social & Gamification — Product Roadmap
 
-**Status:** direção aprovada; Fase 0 (Fauna Foundation) implementada parcialmente; social remoto ainda não iniciado.
+**Status:** direção aprovada; Fase 0 (Fauna Foundation) implementada; schema PostgreSQL remoto preparado; integração social no app ainda pendente.
 
 ## Problema
 
@@ -134,12 +134,12 @@ Como membro, quero metas curtas além do ranking para voltar ao app durante a se
 
 | ID | Resultado | Prioridade | Estado |
 | --- | --- | --- | --- |
-| FAUNA-01 | Regra de ranking configurável por grupo | P1 | Pending |
-| FAUNA-02 | Participação sincronizada ou por publicação | P1 | Pending |
-| FAUNA-03 | Limites mínimos/máximos e teto diário | P1 | Pending |
+| FAUNA-01 | Regra de ranking configurável por grupo | P1 | Partial — schema PostgreSQL preparado; API/UI pending |
+| FAUNA-02 | Participação sincronizada ou por publicação | P1 | Partial — claim contract preparado; integração pending |
+| FAUNA-03 | Limites mínimos/máximos e teto diário | P1 | Partial — trigger PostgreSQL preparado; integração pending |
 | FAUNA-04 | Tiers, facção, Forma e Legado | P1 | Implemented partially — Forma/Legado local; facção futura |
 | FAUNA-05 | Mascote visível no Home, perfil e ranking | P1 | Implemented partially — Habitat/Home nesta fase |
-| FAUNA-06 | Grupos privados e ranking de temporada | P1 | Pending |
+| FAUNA-06 | Grupos privados e ranking de temporada | P1 | Partial — schema remoto preparado; feature pending |
 | FAUNA-07 | Mural, posts, reações, comentários e moderação básica | P1 | Pending |
 | FAUNA-08 | Login social e banner de conexão não bloqueante | P2 | Pending |
 | FAUNA-09 | Missões e encerramento de temporada | P2 | Pending |
