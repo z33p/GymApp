@@ -5,6 +5,9 @@ import 'package:gym_app/core/config/app_providers.dart';
 import 'package:gym_app/features/auth/domain/app_user.dart';
 import 'package:gym_app/features/auth/domain/auth_repository.dart';
 import 'package:gym_app/features/auth/presentation/login_screen.dart';
+import 'package:gym_app/features/auth/presentation/auth_gate.dart';
+import 'package:gym_app/features/devices/domain/fitness_import_repository.dart';
+import 'package:gym_app/features/devices/domain/fitness_provider.dart';
 
 class FakeAuthRepository implements AuthRepository {
   bool debugSignedIn = false;
@@ -32,6 +35,16 @@ class FakeAuthRepository implements AuthRepository {
   @override
   Future<void> signInWith(AuthProvider provider) async {
     throw AuthProviderNotConfiguredException(provider);
+  }
+}
+
+class CountingFitnessImportRepository implements FitnessImportRepository {
+  int syncCalls = 0;
+
+  @override
+  Future<FitnessSyncResult> sync(FitnessProviderType provider, {bool manual = false}) async {
+    syncCalls++;
+    throw StateError('sync should not be called without a session');
   }
 }
 
@@ -77,5 +90,70 @@ void main() {
 
     expect(find.textContaining('Google ainda não está conectado'), findsOneWidget);
     expect(find.text('Entre no GymApp'), findsOneWidget);
+  });
+
+  testWidgets('external buttons expose the same not-configured contract', (tester) async {
+    for (final entry in <({String button, String provider})>[
+      (button: 'Continuar com Microsoft', provider: 'Microsoft'),
+      (button: 'Continuar com Apple', provider: 'Apple'),
+    ]) {
+      final auth = FakeAuthRepository();
+      await tester.pumpWidget(buildLogin(auth));
+      await tester.tap(find.text(entry.button));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('${entry.provider} ainda não está conectado'), findsOneWidget);
+    }
+  });
+
+  testWidgets('debug entry passes through AuthGate to the app', (tester) async {
+    final auth = FakeAuthRepository();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authRepositoryProvider.overrideWithValue(auth),
+          currentUserProvider.overrideWith((ref) => auth.debugSignedIn ? auth.user : null),
+          bootstrapProvider.overrideWith((ref) async {}),
+        ],
+        child: const MaterialApp(home: AuthGate(child: Text('Habitat'))),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(LoginScreen), findsOneWidget);
+
+    await tester.tap(find.text('Entrar em modo desenvolvimento'));
+    await tester.pumpAndSettle();
+    expect(find.text('Habitat'), findsOneWidget);
+  });
+
+  testWidgets('existing local session opens the app without login', (tester) async {
+    final auth = FakeAuthRepository()..debugSignedIn = true;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authRepositoryProvider.overrideWithValue(auth),
+          currentUserProvider.overrideWith((ref) async => auth.user),
+        ],
+        child: const MaterialApp(home: AuthGate(child: Text('Habitat'))),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Habitat'), findsOneWidget);
+    expect(find.byType(LoginScreen), findsNothing);
+  });
+
+  test('bootstrap without a session does not create a user or sync', () async {
+    final auth = FakeAuthRepository();
+    final fitness = CountingFitnessImportRepository();
+    final container = ProviderContainer(
+      overrides: [
+        authRepositoryProvider.overrideWithValue(auth),
+        fitnessImportRepositoryProvider.overrideWithValue(fitness),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    await container.read(bootstrapProvider.future);
+    expect(await auth.getCurrentUser(), isNull);
+    expect(fitness.syncCalls, 0);
   });
 }
