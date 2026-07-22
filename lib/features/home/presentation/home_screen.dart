@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/design_system/ds_theme.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,11 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFF2563EB); // Modern vibrant blue
-    const backgroundColor = Color(0xFFFAFAFA);
-    const surfaceColor = Colors.white;
-    const textPrimary = Color(0xFF0F172A);
-    const textSecondary = Color(0xFF64748B);
+    final dsColors = context.dsColors;
+    final primaryColor = dsColors.primary;
+    final backgroundColor = dsColors.background;
+    final surfaceColor = dsColors.surface;
+    final textPrimary = dsColors.onSurface;
+    final textSecondary = dsColors.textMuted;
+    final borderColor = dsColors.border;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -33,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'GymApp',
                     style: TextStyle(
                       fontSize: 28,
@@ -46,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.notifications_none_rounded,
                           size: 28,
                           color: textPrimary,
@@ -77,10 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   color: surfaceColor,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  border: Border.all(color: borderColor),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.02),
+                      color: Colors.black.withValues(alpha: 0.02),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -89,9 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: _selectedGroup,
-                    icon: const Icon(Icons.keyboard_arrow_down_rounded,
+                    dropdownColor: surfaceColor,
+                    icon: Icon(Icons.keyboard_arrow_down_rounded,
                         color: textPrimary),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: textPrimary,
@@ -107,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         _groups.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child:
+                            Text(value, style: TextStyle(color: textPrimary)),
                       );
                     }).toList(),
                   ),
@@ -120,10 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   color: surfaceColor,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFF1F5F9)),
+                  border: Border.all(color: borderColor),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
+                      color: Colors.black.withValues(alpha: 0.04),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -136,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Ranking',
                           style: TextStyle(
                             fontSize: 18,
@@ -151,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             minimumSize: Size.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 'Ver todos',
@@ -161,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: primaryColor,
                                 ),
                               ),
-                              SizedBox(width: 2),
+                              const SizedBox(width: 2),
                               Icon(Icons.chevron_right_rounded,
                                   size: 18, color: primaryColor),
                             ],
@@ -175,8 +181,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       height: 38,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF1F5F9),
+                        color: backgroundColor,
                         borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: borderColor),
                       ),
                       child: Row(
                         children: [
@@ -193,8 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   boxShadow: _selectedRankingTab == 0
                                       ? [
                                           BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.05),
+                                            color: Colors.black
+                                                .withValues(alpha: 0.05),
                                             blurRadius: 4,
                                             offset: const Offset(0, 2),
                                           ),
@@ -228,8 +235,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   boxShadow: _selectedRankingTab == 1
                                       ? [
                                           BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.05),
+                                            color: Colors.black
+                                                .withValues(alpha: 0.05),
                                             blurRadius: 4,
                                             offset: const Offset(0, 2),
                                           ),
@@ -257,6 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // Top 4 Ranking List
                     _buildRankingItem(
+                      context: context,
                       pos: 1,
                       name: 'Rafael',
                       animal: '🦁 LEÃO',
@@ -265,6 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       avatarUrl: 'https://i.pravatar.cc/150?img=11',
                     ),
                     _buildRankingItem(
+                      context: context,
                       pos: 2,
                       name: 'Marina',
                       animal: '🐯 TIGRE',
@@ -273,6 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       avatarUrl: 'https://i.pravatar.cc/150?img=5',
                     ),
                     _buildRankingItem(
+                      context: context,
                       pos: 3,
                       name: 'Lucas',
                       animal: '🦅 ÁGUIA',
@@ -281,6 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       avatarUrl: 'https://i.pravatar.cc/150?img=12',
                     ),
                     _buildRankingItem(
+                      context: context,
                       pos: 4,
                       name: 'Você',
                       animal: '🦁 LEÃO',
@@ -295,6 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // 4. Feed Section
               _buildFeedItem(
+                context: context,
                 userName: 'Bruna',
                 userAvatar: 'https://i.pravatar.cc/150?img=20',
                 timeAgo: '2h',
@@ -323,6 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20),
 
               _buildFeedItem(
+                context: context,
                 userName: 'Lucas',
                 userAvatar: 'https://i.pravatar.cc/150?img=12',
                 timeAgo: '5h',
@@ -357,6 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildRankingItem({
+    required BuildContext context,
     required int pos,
     required String name,
     required String animal,
@@ -364,17 +378,21 @@ class _HomeScreenState extends State<HomeScreen> {
     required bool isUser,
     String? avatarUrl,
   }) {
-    const primaryColor = Color(0xFF2563EB);
-    const textPrimary = Color(0xFF0F172A);
-    const textSecondary = Color(0xFF64748B);
+    final dsColors = context.dsColors;
+    final primaryColor = dsColors.primary;
+    final textPrimary = dsColors.onSurface;
+    final textSecondary = dsColors.textMuted;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: isUser ? const Color(0xFFEFF6FF) : Colors.transparent,
+        color:
+            isUser ? primaryColor.withValues(alpha: 0.15) : Colors.transparent,
         borderRadius: BorderRadius.circular(12),
-        border: isUser ? Border.all(color: const Color(0xFFBFDBFE)) : null,
+        border: isUser
+            ? Border.all(color: primaryColor.withValues(alpha: 0.4))
+            : null,
       ),
       child: Row(
         children: [
@@ -398,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CircleAvatar(
             radius: 18,
             backgroundColor:
-                isUser ? const Color(0xFFDBEAFE) : const Color(0xFFE2E8F0),
+                isUser ? primaryColor.withValues(alpha: 0.25) : dsColors.border,
             child: Text(
               name[0],
               style: TextStyle(
@@ -460,7 +478,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 'pts',
                 style: TextStyle(
                   fontSize: 11,
-                  color: isUser ? primaryColor.withOpacity(0.8) : textSecondary,
+                  color: isUser
+                      ? primaryColor.withValues(alpha: 0.8)
+                      : textSecondary,
                 ),
               ),
             ],
@@ -471,6 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildFeedItem({
+    required BuildContext context,
     required String userName,
     required String userAvatar,
     required String timeAgo,
@@ -478,18 +499,20 @@ class _HomeScreenState extends State<HomeScreen> {
     required String imageUrl,
     required List<_MetricData> metrics,
   }) {
-    const surfaceColor = Colors.white;
-    const textPrimary = Color(0xFF0F172A);
-    const textSecondary = Color(0xFF64748B);
+    final dsColors = context.dsColors;
+    final surfaceColor = dsColors.surface;
+    final textPrimary = dsColors.onSurface;
+    final textSecondary = dsColors.textMuted;
+    final borderColor = dsColors.border;
 
     return Container(
       decoration: BoxDecoration(
         color: surfaceColor,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
+        border: Border.all(color: borderColor),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -504,10 +527,10 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundColor: const Color(0xFFE2E8F0),
+                backgroundColor: borderColor,
                 child: Text(
                   userName[0],
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: textPrimary,
                     fontSize: 14,
@@ -518,7 +541,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Text(
                   userName,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: textPrimary,
@@ -527,10 +550,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Text(
                 timeAgo,
-                style: const TextStyle(fontSize: 13, color: textSecondary),
+                style: TextStyle(fontSize: 13, color: textSecondary),
               ),
               const SizedBox(width: 4),
-              const Icon(Icons.more_horiz, color: textSecondary, size: 20),
+              Icon(Icons.more_horiz, color: textSecondary, size: 20),
             ],
           ),
           const SizedBox(height: 10),
@@ -538,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // Caption
           Text(
             caption,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               color: textPrimary,
               height: 1.3,
@@ -585,11 +608,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(m.icon, size: 16, color: const Color(0xFF2563EB)),
+                      Icon(m.icon, size: 16, color: dsColors.primary),
                       const SizedBox(width: 4),
                       Text(
                         m.value,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: textPrimary,
@@ -600,7 +623,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 2),
                   Text(
                     m.label,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
                       color: textSecondary,
                     ),

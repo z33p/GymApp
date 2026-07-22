@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../design_system/ds_theme.dart';
 import '../../l10n/app_localizations.dart';
 
 class AppShell extends StatelessWidget {
@@ -12,6 +13,7 @@ class AppShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
     final l10n = AppLocalizations.of(context)!;
+    final dsColors = context.dsColors;
 
     final leftTabs = [
       ('/home', l10n.homeTitle, Icons.home_rounded),
@@ -40,9 +42,8 @@ class AppShell extends StatelessWidget {
     }
 
     final selectedIndex = getSelectedIndex();
-    const primaryColor = Color(0xFF2563EB);
-    const activeColor = Color(0xFF2563EB);
-    const inactiveColor = Color(0xFF94A3B8);
+    final activeColor = dsColors.primary;
+    final inactiveColor = dsColors.textMuted;
 
     return Scaffold(
       body: child,
@@ -54,15 +55,16 @@ class AppShell extends StatelessWidget {
         child: FloatingActionButton(
           elevation: 4,
           shape: const CircleBorder(),
-          backgroundColor: primaryColor,
+          backgroundColor: dsColors.primary,
+          foregroundColor: dsColors.onPrimary,
           onPressed: () => context.push('/publish'),
-          child: const Icon(Icons.add, size: 30, color: Colors.white),
+          child: Icon(Icons.add, size: 30, color: dsColors.onPrimary),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
-        color: Colors.white,
+        color: dsColors.surface,
         elevation: 8,
         padding: EdgeInsets.zero,
         height: 65,
