@@ -7,9 +7,9 @@ class AppShell extends StatelessWidget {
   final Widget child;
 
   static const tabs = [
-    ('/home', 'Habitat', Icons.pets_rounded),
     ('/history', 'History', Icons.history_rounded),
     ('/progress', 'Progress', Icons.bar_chart_rounded),
+    ('/home', 'Habitat', Icons.pets_rounded),
     ('/devices', 'Devices', Icons.watch_rounded),
     ('/settings', 'Settings', Icons.settings_rounded),
   ];
