@@ -1,7 +1,26 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {"name": "GymApp iOS (Debug)", "request": "launch", "type": "dart", "flutterMode": "debug", "program": "lib/main.dart"},
-    {"name": "GymApp iOS (Profile)", "request": "launch", "type": "dart", "flutterMode": "profile", "program": "lib/main.dart"}
+    {
+      "name": "GymApp (Debug)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "GymApp (Profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "GymApp (Release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "lib/main.dart"
+    }
   ]
 }
