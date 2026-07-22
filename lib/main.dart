@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/config/app_providers.dart';
@@ -48,6 +47,7 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
     final settings = ref.watch(settingsControllerProvider).valueOrNull;
     final bootstrap = ref.watch(bootstrapProvider);
     final bootstrapSyncWarning = ref.watch(bootstrapSyncWarningProvider);
+    final l10n = AppLocalizations.of(context);
 
     return MaterialApp.router(
       title: 'GymApp',
@@ -61,18 +61,21 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
       builder: (context, child) {
         final content = bootstrap.when(
           data: (_) => AuthGate(child: child ?? const SizedBox.shrink()),
+          error: (error, _) => Material(
+            child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('GymApp could not finish startup.'),
+                    Text(l10n?.startupError ??
+                        'GymApp could not finish startup.'),
                     const SizedBox(height: 12),
                     Text('$error', textAlign: TextAlign.center),
                     const SizedBox(height: 12),
                     FilledButton(
                       onPressed: () => ref.invalidate(bootstrapProvider),
-                      child: const Text('Retry'),
+                      child: Text(l10n?.retry ?? 'Retry'),
                     ),
                   ],
                 ),
@@ -86,7 +89,9 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
           ),
         );
 
-        if (bootstrapSyncWarning == null || bootstrap.isLoading || bootstrap.hasError) {
+        if (bootstrapSyncWarning == null ||
+            bootstrap.isLoading ||
+            bootstrap.hasError) {
           return content;
         }
 
@@ -96,12 +101,16 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
               content: Text(bootstrapSyncWarning),
               actions: [
                 TextButton(
-                  onPressed: () => ref.read(syncControllerProvider.notifier).syncAppleHealth(),
-                  child: const Text('Retry sync'),
+                  onPressed: () => ref
+                      .read(syncControllerProvider.notifier)
+                      .syncAppleHealth(),
+                  child: Text(l10n?.retrySync ?? 'Retry sync'),
                 ),
                 TextButton(
-                  onPressed: () => ref.read(bootstrapSyncWarningProvider.notifier).state = null,
-                  child: const Text('Dismiss'),
+                  onPressed: () => ref
+                      .read(bootstrapSyncWarningProvider.notifier)
+                      .state = null,
+                  child: Text(l10n?.dismiss ?? 'Dismiss'),
                 ),
               ],
             ),
