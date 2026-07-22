@@ -38,11 +38,14 @@ class SettingsScreen extends ConsumerWidget {
                       initialValue: value.themePreference,
                       decoration: const InputDecoration(labelText: 'Theme'),
                       items: AppThemePreference.values
-                          .map((theme) => DropdownMenuItem(value: theme, child: Text(theme.name)))
+                          .map((theme) => DropdownMenuItem(
+                              value: theme, child: Text(theme.name)))
                           .toList(),
                       onChanged: (selection) {
                         if (selection != null) {
-                          ref.read(settingsControllerProvider.notifier).updateTheme(selection);
+                          ref
+                              .read(settingsControllerProvider.notifier)
+                              .updateTheme(selection);
                         }
                       },
                     ),
@@ -51,11 +54,14 @@ class SettingsScreen extends ConsumerWidget {
                       initialValue: value.units,
                       decoration: const InputDecoration(labelText: 'Units'),
                       items: AppUnits.values
-                          .map((units) => DropdownMenuItem(value: units, child: Text(units.name)))
+                          .map((units) => DropdownMenuItem(
+                              value: units, child: Text(units.name)))
                           .toList(),
                       onChanged: (selection) {
                         if (selection != null) {
-                          ref.read(settingsControllerProvider.notifier).updateUnits(selection);
+                          ref
+                              .read(settingsControllerProvider.notifier)
+                              .updateUnits(selection);
                         }
                       },
                     ),
@@ -73,7 +79,8 @@ class SettingsScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l10n.localDataTitle, style: Theme.of(context).textTheme.titleMedium),
+                  Text(l10n.localDataTitle,
+                      style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 8),
                   Text(l10n.localDataDescription),
                   const SizedBox(height: 16),
@@ -81,7 +88,9 @@ class SettingsScreen extends ConsumerWidget {
                     onPressed: syncController.isLoading
                         ? null
                         : () async {
-                            await ref.read(syncControllerProvider.notifier).clearLocalData();
+                            await ref
+                                .read(syncControllerProvider.notifier)
+                                .clearLocalData();
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(l10n.localDataCleared)),

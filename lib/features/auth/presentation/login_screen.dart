@@ -27,7 +27,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       ref.invalidate(bootstrapProvider);
     } catch (error) {
       if (!mounted) return;
-      setState(() => _errorMessage = 'Não foi possível iniciar o modo de desenvolvimento: $error');
+      setState(() => _errorMessage =
+          'Não foi possível iniciar o modo de desenvolvimento: $error');
     }
   }
 
@@ -42,7 +43,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       if (!mounted) return;
       setState(() {
         _loadingProvider = null;
-        _errorMessage = '${_providerLabel(provider)} ainda não está conectado ao backend. Use o modo de desenvolvimento para continuar.';
+        _errorMessage =
+            '${_providerLabel(provider)} ainda não está conectado ao backend. Use o modo de desenvolvimento para continuar.';
       });
     } catch (error) {
       if (!mounted) return;
@@ -87,20 +89,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         CircleAvatar(
                           radius: 28,
                           backgroundColor: theme.colorScheme.primary,
-                          child: Icon(Icons.pets_rounded, color: theme.colorScheme.onPrimary, size: 30),
+                          child: Icon(Icons.pets_rounded,
+                              color: theme.colorScheme.onPrimary, size: 30),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: Text(
                             'Seu treino.\nSua fauna.',
-                            style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
+                            style: theme.textTheme.headlineSmall
+                                ?.copyWith(fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 28),
-                  Text('Entre no GymApp', style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  Text('Entre no GymApp',
+                      style: theme.textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Text(
                     'Crie sua identidade para acompanhar sua evolução, grupos e ranking.',
@@ -110,19 +116,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   _ProviderButton(
                     label: 'Continuar com Google',
                     icon: Icons.g_mobiledata_rounded,
-                    onPressed: isBusy ? null : () => _signInExternal(AuthProvider.google),
+                    onPressed: isBusy
+                        ? null
+                        : () => _signInExternal(AuthProvider.google),
                   ),
                   const SizedBox(height: 12),
                   _ProviderButton(
                     label: 'Continuar com Microsoft',
                     icon: Icons.window_rounded,
-                    onPressed: isBusy ? null : () => _signInExternal(AuthProvider.microsoft),
+                    onPressed: isBusy
+                        ? null
+                        : () => _signInExternal(AuthProvider.microsoft),
                   ),
                   const SizedBox(height: 12),
                   _ProviderButton(
                     label: 'Continuar com Apple',
                     icon: Icons.apple,
-                    onPressed: isBusy ? null : () => _signInExternal(AuthProvider.apple),
+                    onPressed: isBusy
+                        ? null
+                        : () => _signInExternal(AuthProvider.apple),
                   ),
                   if (kDebugMode) ...[
                     const SizedBox(height: 20),
@@ -131,7 +143,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         const Expanded(child: Divider()),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text('DESENVOLVIMENTO', style: theme.textTheme.labelSmall),
+                          child: Text('DESENVOLVIMENTO',
+                              style: theme.textTheme.labelSmall),
                         ),
                         const Expanded(child: Divider()),
                       ],
@@ -140,7 +153,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     OutlinedButton.icon(
                       onPressed: isBusy ? null : _signInDebug,
                       icon: const Icon(Icons.developer_mode_rounded),
-                      label: Text(_loadingProvider == null ? 'Entrar em modo desenvolvimento' : 'Conectando...'),
+                      label: Text(_loadingProvider == null
+                          ? 'Entrar em modo desenvolvimento'
+                          : 'Conectando...'),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -153,7 +168,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     const SizedBox(height: 16),
                     Semantics(
                       liveRegion: true,
-                      child: Text(_errorMessage!, textAlign: TextAlign.center, style: TextStyle(color: theme.colorScheme.error)),
+                      child: Text(_errorMessage!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: theme.colorScheme.error)),
                     ),
                   ],
                 ],
@@ -167,7 +184,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 }
 
 class _ProviderButton extends StatelessWidget {
-  const _ProviderButton({required this.label, required this.icon, required this.onPressed});
+  const _ProviderButton(
+      {required this.label, required this.icon, required this.onPressed});
 
   final String label;
   final IconData icon;
@@ -179,7 +197,9 @@ class _ProviderButton extends StatelessWidget {
       onPressed: onPressed,
       icon: Icon(icon),
       label: Text(label),
-      style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(54), alignment: Alignment.centerLeft),
+      style: OutlinedButton.styleFrom(
+          minimumSize: const Size.fromHeight(54),
+          alignment: Alignment.centerLeft),
     );
   }
 }

@@ -106,7 +106,9 @@ class ImportedWorkout {
     );
   }
 
-  String get displaySource => sourceName?.trim().isNotEmpty == true ? sourceName!.trim() : platform.label;
+  String get displaySource => sourceName?.trim().isNotEmpty == true
+      ? sourceName!.trim()
+      : platform.label;
 
   String get displayActivityType {
     return activityType
@@ -143,7 +145,8 @@ class ImportedWorkout {
     return ImportedWorkout(
       id: map['id'] as int?,
       externalId: map['external_id'] as String?,
-      platform: WorkoutPlatformX.fromValue(map['platform'] as String? ?? 'mock'),
+      platform:
+          WorkoutPlatformX.fromValue(map['platform'] as String? ?? 'mock'),
       sourceName: map['source_name'] as String?,
       activityType: map['activity_type'] as String? ?? 'unknown',
       startTime: DateTime.parse(map['start_time'] as String),
@@ -156,10 +159,13 @@ class ImportedWorkout {
       notes: map['notes'] as String?,
       rawPayload: map['raw_payload_json'] == null
           ? null
-          : Map<String, dynamic>.from(jsonDecode(map['raw_payload_json'] as String) as Map),
+          : Map<String, dynamic>.from(
+              jsonDecode(map['raw_payload_json'] as String) as Map),
       importedAt: DateTime.parse(map['imported_at'] as String),
       updatedAt: DateTime.parse(map['updated_at'] as String),
-      deletedAt: map['deleted_at'] == null ? null : DateTime.parse(map['deleted_at'] as String),
+      deletedAt: map['deleted_at'] == null
+          ? null
+          : DateTime.parse(map['deleted_at'] as String),
     );
   }
 
@@ -172,7 +178,8 @@ class ImportedWorkout {
       externalId: payload['externalId'] as String?,
       platform: platform,
       sourceName: payload['sourceName'] as String?,
-      activityType: (payload['activityType'] as String? ?? 'unknown').toLowerCase(),
+      activityType:
+          (payload['activityType'] as String? ?? 'unknown').toLowerCase(),
       startTime: DateTime.parse(payload['startTime'] as String).toUtc(),
       endTime: DateTime.parse(payload['endTime'] as String).toUtc(),
       durationSeconds: (payload['durationSeconds'] as num?)?.round() ?? 0,

@@ -24,16 +24,38 @@ class ProgressScreen extends ConsumerWidget {
             crossAxisSpacing: 14,
             childAspectRatio: 1.15,
             children: [
-              StatCard(label: 'Workouts this week', value: '${value.workoutsThisWeek}', icon: Icons.fitness_center_rounded),
-              StatCard(label: 'Workouts this month', value: '${value.workoutsThisMonth}', icon: Icons.calendar_month_rounded),
-              StatCard(label: 'Duration this week', value: Formatters.duration(value.totalDurationThisWeekSeconds), icon: Icons.timer_rounded),
-              StatCard(label: 'Calories this week', value: '${value.totalCaloriesThisWeek.round()} kcal', icon: Icons.local_fire_department_rounded),
-              StatCard(label: 'Distance this week', value: Formatters.distanceMeters(value.totalDistanceThisWeekMeters) ?? '0 m', icon: Icons.route_rounded),
-              StatCard(label: 'Current streak', value: '${value.currentStreakDays} days', icon: Icons.bolt_rounded),
+              StatCard(
+                  label: 'Workouts this week',
+                  value: '${value.workoutsThisWeek}',
+                  icon: Icons.fitness_center_rounded),
+              StatCard(
+                  label: 'Workouts this month',
+                  value: '${value.workoutsThisMonth}',
+                  icon: Icons.calendar_month_rounded),
+              StatCard(
+                  label: 'Duration this week',
+                  value:
+                      Formatters.duration(value.totalDurationThisWeekSeconds),
+                  icon: Icons.timer_rounded),
+              StatCard(
+                  label: 'Calories this week',
+                  value: '${value.totalCaloriesThisWeek.round()} kcal',
+                  icon: Icons.local_fire_department_rounded),
+              StatCard(
+                  label: 'Distance this week',
+                  value: Formatters.distanceMeters(
+                          value.totalDistanceThisWeekMeters) ??
+                      '0 m',
+                  icon: Icons.route_rounded),
+              StatCard(
+                  label: 'Current streak',
+                  value: '${value.currentStreakDays} days',
+                  icon: Icons.bolt_rounded),
             ],
           );
         },
-        error: (error, _) => Center(child: Text(l10n.failedToLoadProgress('$error'))),
+        error: (error, _) =>
+            Center(child: Text(l10n.failedToLoadProgress('$error'))),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );

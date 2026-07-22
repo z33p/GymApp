@@ -50,7 +50,8 @@ class SyncStateRecord {
   }
 
   factory SyncStateRecord.fromMap(Map<String, Object?> map) {
-    final providerValue = map['provider'] as String? ?? FitnessProviderType.appleHealth.value;
+    final providerValue =
+        map['provider'] as String? ?? FitnessProviderType.appleHealth.value;
     return SyncStateRecord(
       id: map['id'] as int?,
       provider: FitnessProviderType.values.firstWhere(

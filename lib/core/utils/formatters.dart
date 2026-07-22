@@ -18,7 +18,8 @@ class Formatters {
     return '${minutes}m';
   }
 
-  static String? calories(double? kcal) => kcal == null ? null : '${kcal.round()} kcal';
+  static String? calories(double? kcal) =>
+      kcal == null ? null : '${kcal.round()} kcal';
   static String? distanceMeters(double? meters) {
     if (meters == null) return null;
     if (meters >= 1000) {

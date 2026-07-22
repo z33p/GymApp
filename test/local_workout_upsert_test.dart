@@ -14,7 +14,8 @@ void main() {
   setUp(() async {
     sqfliteFfiInit();
     database = AppDatabase(factory: databaseFactoryFfi);
-    repository = LocalWorkoutRepository(database, const LocalWorkoutDataSource());
+    repository =
+        LocalWorkoutRepository(database, const LocalWorkoutDataSource());
     await database.database;
     await database.clearAllData();
   });
@@ -34,7 +35,8 @@ void main() {
       importedAt: base,
       updatedAt: base,
     );
-    final updated = original.copyWith(activeEnergyKcal: 250, distanceMeters: 3600);
+    final updated =
+        original.copyWith(activeEnergyKcal: 250, distanceMeters: 3600);
 
     await repository.upsertWorkouts([original]);
     await repository.upsertWorkouts([updated]);

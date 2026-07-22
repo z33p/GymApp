@@ -4,22 +4,30 @@ import 'package:gym_app/features/gamification/domain/fauna_rank.dart';
 import 'package:gym_app/features/gamification/presentation/fauna_mascot.dart';
 
 void main() {
-  testWidgets('renders every fauna tier with its mascot and semantics', (tester) async {
+  testWidgets('renders every fauna tier with its mascot and semantics',
+      (tester) async {
     final semantics = tester.ensureSemantics();
     for (final tier in FaunaTier.values) {
       final rank = FaunaRank(
         tier: tier,
         formPoints: tier.minimumPoints,
         legacyPoints: tier.minimumPoints,
-        nextTier: tier == FaunaTier.apex ? null : FaunaTier.values[tier.index + 1],
-        nextTierPoints: tier == FaunaTier.apex ? null : FaunaTier.values[tier.index + 1].minimumPoints,
+        nextTier:
+            tier == FaunaTier.apex ? null : FaunaTier.values[tier.index + 1],
+        nextTierPoints: tier == FaunaTier.apex
+            ? null
+            : FaunaTier.values[tier.index + 1].minimumPoints,
       );
 
-      await tester.pumpWidget(MaterialApp(home: Scaffold(body: FaunaMascot(rank: rank))));
+      await tester.pumpWidget(
+          MaterialApp(home: Scaffold(body: FaunaMascot(rank: rank))));
 
       expect(find.text(tier.label), findsOneWidget);
       expect(find.text(tier.mascot), findsOneWidget);
-      expect(find.bySemanticsLabel('${tier.label}, ${tier.minimumPoints} pontos de Forma'), findsOneWidget);
+      expect(
+          find.bySemanticsLabel(
+              '${tier.label}, ${tier.minimumPoints} pontos de Forma'),
+          findsOneWidget);
     }
     semantics.dispose();
   });
@@ -47,7 +55,8 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('renders the apex identity without choosing a faction', (tester) async {
+  testWidgets('renders the apex identity without choosing a faction',
+      (tester) async {
     const rank = FaunaRank(
       tier: FaunaTier.apex,
       formPoints: 12,

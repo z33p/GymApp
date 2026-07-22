@@ -43,7 +43,9 @@ class MockFitnessDataSource {
         updatedAt: now,
       ),
     ];
-    return AppleHealthSyncPayload(workouts: workouts, anchorData: 'mock-anchor-${now.millisecondsSinceEpoch}');
+    return AppleHealthSyncPayload(
+        workouts: workouts,
+        anchorData: 'mock-anchor-${now.millisecondsSinceEpoch}');
   }
 
   Future<String> getAuthorizationStatus() async => 'preview';

@@ -28,32 +28,40 @@ import '../database/app_database.dart';
 import 'app_settings.dart';
 
 final appDatabaseProvider = Provider<AppDatabase>((ref) => AppDatabase());
-final workoutStatsCalculatorProvider = Provider<WorkoutStatsCalculator>((ref) => const WorkoutStatsCalculator());
-final faunaRankCalculatorProvider = Provider<FaunaRankCalculator>((ref) => const FaunaRankCalculator());
+final workoutStatsCalculatorProvider =
+    Provider<WorkoutStatsCalculator>((ref) => const WorkoutStatsCalculator());
+final faunaRankCalculatorProvider =
+    Provider<FaunaRankCalculator>((ref) => const FaunaRankCalculator());
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return LocalAuthRepository(ref.watch(appDatabaseProvider), const MockAuthDataSource());
+  return LocalAuthRepository(
+      ref.watch(appDatabaseProvider), const MockAuthDataSource());
 });
 
 final workoutRepositoryProvider = Provider<WorkoutRepository>((ref) {
-  return LocalWorkoutRepository(ref.watch(appDatabaseProvider), const LocalWorkoutDataSource());
+  return LocalWorkoutRepository(
+      ref.watch(appDatabaseProvider), const LocalWorkoutDataSource());
 });
 
 final syncStateRepositoryProvider = Provider<SyncStateRepository>((ref) {
   return LocalSyncStateRepository(ref.watch(appDatabaseProvider));
 });
 
-final appleHealthDataSourceProvider = Provider((ref) => AppleHealthDataSource());
-final mockFitnessDataSourceProvider = Provider((ref) => const MockFitnessDataSource());
+final appleHealthDataSourceProvider =
+    Provider((ref) => AppleHealthDataSource());
+final mockFitnessDataSourceProvider =
+    Provider((ref) => const MockFitnessDataSource());
 
-final deviceIntegrationRepositoryProvider = Provider<DeviceIntegrationRepository>((ref) {
+final deviceIntegrationRepositoryProvider =
+    Provider<DeviceIntegrationRepository>((ref) {
   return DeviceIntegrationRepositoryImpl(
     ref.watch(appleHealthDataSourceProvider),
     ref.watch(mockFitnessDataSourceProvider),
   );
 });
 
-final fitnessImportRepositoryProvider = Provider<FitnessImportRepository>((ref) {
+final fitnessImportRepositoryProvider =
+    Provider<FitnessImportRepository>((ref) {
   return FitnessImportRepositoryImpl(
     ref.watch(appleHealthDataSourceProvider),
     ref.watch(mockFitnessDataSourceProvider),
@@ -63,7 +71,8 @@ final fitnessImportRepositoryProvider = Provider<FitnessImportRepository>((ref) 
 });
 
 final refreshTickerProvider = StateProvider<int>((ref) => 0);
-final historyFiltersProvider = StateProvider<WorkoutFilterState>((ref) => const WorkoutFilterState());
+final historyFiltersProvider =
+    StateProvider<WorkoutFilterState>((ref) => const WorkoutFilterState());
 final bootstrapSyncWarningProvider = StateProvider<String?>((ref) => null);
 
 final currentUserProvider = FutureProvider<AppUser?>((ref) async {
@@ -80,7 +89,9 @@ final bootstrapProvider = FutureProvider<void>((ref) async {
     return;
   }
   try {
-    await ref.watch(fitnessImportRepositoryProvider).sync(FitnessProviderType.appleHealth);
+    await ref
+        .watch(fitnessImportRepositoryProvider)
+        .sync(FitnessProviderType.appleHealth);
   } catch (error, stackTrace) {
     debugPrint('Bootstrap sync failed: $error');
     debugPrintStack(stackTrace: stackTrace);
@@ -100,25 +111,33 @@ final allWorkoutsProvider = FutureProvider<List<ImportedWorkout>>((ref) async {
   return ref.watch(workoutRepositoryProvider).getWorkouts();
 });
 
-final historyWorkoutsProvider = FutureProvider<List<ImportedWorkout>>((ref) async {
+final historyWorkoutsProvider =
+    FutureProvider<List<ImportedWorkout>>((ref) async {
   ref.watch(refreshTickerProvider);
   final filters = ref.watch(historyFiltersProvider);
   return ref.watch(workoutRepositoryProvider).getWorkouts(filters: filters);
 });
 
-final workoutByIdProvider = FutureProvider.family<ImportedWorkout?, int>((ref, id) async {
+final workoutByIdProvider =
+    FutureProvider.family<ImportedWorkout?, int>((ref, id) async {
   ref.watch(refreshTickerProvider);
   return ref.watch(workoutRepositoryProvider).getWorkoutById(id);
 });
 
-final syncStateProvider = FutureProvider.family<SyncStateRecord?, FitnessProviderType>((ref, provider) async {
+final syncStateProvider =
+    FutureProvider.family<SyncStateRecord?, FitnessProviderType>(
+        (ref, provider) async {
   ref.watch(refreshTickerProvider);
   return ref.watch(syncStateRepositoryProvider).getSyncState(provider);
 });
 
-final deviceConnectionProvider = FutureProvider.family<DeviceConnectionInfo, FitnessProviderType>((ref, provider) async {
+final deviceConnectionProvider =
+    FutureProvider.family<DeviceConnectionInfo, FitnessProviderType>(
+        (ref, provider) async {
   ref.watch(refreshTickerProvider);
-  return ref.watch(deviceIntegrationRepositoryProvider).getConnectionInfo(provider);
+  return ref
+      .watch(deviceIntegrationRepositoryProvider)
+      .getConnectionInfo(provider);
 });
 
 final progressStatsProvider = FutureProvider<WorkoutProgressStats>((ref) async {
@@ -138,7 +157,9 @@ class SyncController extends AsyncNotifier<void> {
   Future<void> connectAppleHealth() async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref.read(deviceIntegrationRepositoryProvider).connect(FitnessProviderType.appleHealth);
+      await ref
+          .read(deviceIntegrationRepositoryProvider)
+          .connect(FitnessProviderType.appleHealth);
       ref.read(refreshTickerProvider.notifier).state++;
     });
   }
@@ -146,7 +167,9 @@ class SyncController extends AsyncNotifier<void> {
   Future<void> syncAppleHealth({bool manual = true}) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref.read(fitnessImportRepositoryProvider).sync(FitnessProviderType.appleHealth, manual: manual);
+      await ref
+          .read(fitnessImportRepositoryProvider)
+          .sync(FitnessProviderType.appleHealth, manual: manual);
       ref.read(refreshTickerProvider.notifier).state++;
     });
   }
@@ -160,7 +183,8 @@ class SyncController extends AsyncNotifier<void> {
   }
 }
 
-final syncControllerProvider = AsyncNotifierProvider<SyncController, void>(SyncController.new);
+final syncControllerProvider =
+    AsyncNotifierProvider<SyncController, void>(SyncController.new);
 
 class SettingsController extends AsyncNotifier<AppSettings> {
   static const _themeKey = 'theme_preference';
@@ -169,7 +193,8 @@ class SettingsController extends AsyncNotifier<AppSettings> {
   @override
   Future<AppSettings> build() async {
     final prefs = await SharedPreferences.getInstance();
-    final themeValue = prefs.getString(_themeKey) ?? AppThemePreference.system.name;
+    final themeValue =
+        prefs.getString(_themeKey) ?? AppThemePreference.system.name;
     final unitsValue = prefs.getString(_unitsKey) ?? AppUnits.metric.name;
     return AppSettings(
       themePreference: AppThemePreference.values.firstWhere(
@@ -186,14 +211,18 @@ class SettingsController extends AsyncNotifier<AppSettings> {
   Future<void> updateTheme(AppThemePreference preference) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_themeKey, preference.name);
-    state = AsyncData((state.value ?? const AppSettings()).copyWith(themePreference: preference));
+    state = AsyncData((state.value ?? const AppSettings())
+        .copyWith(themePreference: preference));
   }
 
   Future<void> updateUnits(AppUnits units) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_unitsKey, units.name);
-    state = AsyncData((state.value ?? const AppSettings()).copyWith(units: units));
+    state =
+        AsyncData((state.value ?? const AppSettings()).copyWith(units: units));
   }
 }
 
-final settingsControllerProvider = AsyncNotifierProvider<SettingsController, AppSettings>(SettingsController.new);
+final settingsControllerProvider =
+    AsyncNotifierProvider<SettingsController, AppSettings>(
+        SettingsController.new);

@@ -42,7 +42,8 @@ class CountingFitnessImportRepository implements FitnessImportRepository {
   int syncCalls = 0;
 
   @override
-  Future<FitnessSyncResult> sync(FitnessProviderType provider, {bool manual = false}) async {
+  Future<FitnessSyncResult> sync(FitnessProviderType provider,
+      {bool manual = false}) async {
     syncCalls++;
     throw StateError('sync should not be called without a session');
   }
@@ -59,7 +60,8 @@ Widget buildLogin(FakeAuthRepository auth) {
 }
 
 void main() {
-  testWidgets('shows external providers and explicit debug entry', (tester) async {
+  testWidgets('shows external providers and explicit debug entry',
+      (tester) async {
     final auth = FakeAuthRepository();
     await tester.pumpWidget(buildLogin(auth));
 
@@ -70,7 +72,8 @@ void main() {
     expect(find.text('Entrar em modo desenvolvimento'), findsOneWidget);
   });
 
-  testWidgets('debug entry creates a local session and remains explicit', (tester) async {
+  testWidgets('debug entry creates a local session and remains explicit',
+      (tester) async {
     final auth = FakeAuthRepository();
     await tester.pumpWidget(buildLogin(auth));
 
@@ -78,21 +81,25 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(auth.debugSignedIn, isTrue);
-    expect(find.textContaining('Nenhuma conta externa é criada.'), findsOneWidget);
+    expect(
+        find.textContaining('Nenhuma conta externa é criada.'), findsOneWidget);
   });
 
-  testWidgets('unconfigured provider explains how to continue in debug', (tester) async {
+  testWidgets('unconfigured provider explains how to continue in debug',
+      (tester) async {
     final auth = FakeAuthRepository();
     await tester.pumpWidget(buildLogin(auth));
 
     await tester.tap(find.text('Continuar com Google'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Google ainda não está conectado'), findsOneWidget);
+    expect(
+        find.textContaining('Google ainda não está conectado'), findsOneWidget);
     expect(find.text('Entre no GymApp'), findsOneWidget);
   });
 
-  testWidgets('external buttons expose the same not-configured contract', (tester) async {
+  testWidgets('external buttons expose the same not-configured contract',
+      (tester) async {
     for (final entry in <({String button, String provider})>[
       (button: 'Continuar com Microsoft', provider: 'Microsoft'),
       (button: 'Continuar com Apple', provider: 'Apple'),
@@ -101,7 +108,8 @@ void main() {
       await tester.pumpWidget(buildLogin(auth));
       await tester.tap(find.text(entry.button));
       await tester.pumpAndSettle();
-      expect(find.textContaining('${entry.provider} ainda não está conectado'), findsOneWidget);
+      expect(find.textContaining('${entry.provider} ainda não está conectado'),
+          findsOneWidget);
     }
   });
 
@@ -111,7 +119,8 @@ void main() {
       ProviderScope(
         overrides: [
           authRepositoryProvider.overrideWithValue(auth),
-          currentUserProvider.overrideWith((ref) async => auth.debugSignedIn ? auth.user : null),
+          currentUserProvider.overrideWith(
+              (ref) async => auth.debugSignedIn ? auth.user : null),
           bootstrapProvider.overrideWith((ref) async {}),
         ],
         child: const MaterialApp(home: AuthGate(child: Text('Habitat'))),
@@ -125,7 +134,8 @@ void main() {
     expect(find.text('Habitat'), findsOneWidget);
   });
 
-  testWidgets('existing local session opens the app without login', (tester) async {
+  testWidgets('existing local session opens the app without login',
+      (tester) async {
     final auth = FakeAuthRepository()..debugSignedIn = true;
     await tester.pumpWidget(
       ProviderScope(

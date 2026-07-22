@@ -20,7 +20,8 @@ class FitnessImportRepositoryImpl implements FitnessImportRepository {
   final SyncStateRepository _syncStateRepository;
 
   @override
-  Future<FitnessSyncResult> sync(FitnessProviderType provider, {bool manual = false}) async {
+  Future<FitnessSyncResult> sync(FitnessProviderType provider,
+      {bool manual = false}) async {
     final previousState = await _syncStateRepository.getSyncState(provider);
     final attemptTime = DateTime.now().toUtc();
     await _syncStateRepository.saveSyncState(
@@ -36,8 +37,10 @@ class FitnessImportRepositoryImpl implements FitnessImportRepository {
     );
 
     try {
-      final payload = provider == FitnessProviderType.appleHealth && await _appleHealthDataSource.isAvailable()
-          ? await _appleHealthDataSource.syncWorkouts(anchorData: previousState?.anchorData)
+      final payload = provider == FitnessProviderType.appleHealth &&
+              await _appleHealthDataSource.isAvailable()
+          ? await _appleHealthDataSource.syncWorkouts(
+              anchorData: previousState?.anchorData)
           : await _mockDataSource.syncPreviewWorkouts();
       await _workoutRepository.upsertWorkouts(payload.workouts);
       final newState = SyncStateRecord(

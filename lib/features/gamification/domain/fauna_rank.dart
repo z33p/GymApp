@@ -46,18 +46,24 @@ class FaunaRankCalculator {
   FaunaRank calculate(List<ImportedWorkout> workouts, {DateTime? now}) {
     final reference = (now ?? DateTime.now()).toUtc();
     final formStart = reference.subtract(formWindow);
-    final validWorkouts = workouts.where((workout) => workout.deletedAt == null);
+    final validWorkouts =
+        workouts.where((workout) => workout.deletedAt == null);
     final formPoints = validWorkouts
-        .where((workout) => !workout.startTime.isBefore(formStart) && !workout.startTime.isAfter(reference))
+        .where((workout) =>
+            !workout.startTime.isBefore(formStart) &&
+            !workout.startTime.isAfter(reference))
         .length;
     final legacyPoints = validWorkouts.where((workout) {
       final start = workout.startTime.toUtc();
       return start.year == reference.year;
     }).length;
 
-    final tier = FaunaTier.values.lastWhere((item) => formPoints >= item.minimumPoints);
+    final tier =
+        FaunaTier.values.lastWhere((item) => formPoints >= item.minimumPoints);
     final tierIndex = FaunaTier.values.indexOf(tier);
-    final nextTier = tierIndex == FaunaTier.values.length - 1 ? null : FaunaTier.values[tierIndex + 1];
+    final nextTier = tierIndex == FaunaTier.values.length - 1
+        ? null
+        : FaunaTier.values[tierIndex + 1];
 
     return FaunaRank(
       tier: tier,

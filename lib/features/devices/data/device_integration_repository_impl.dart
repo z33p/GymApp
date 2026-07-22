@@ -6,7 +6,8 @@ import 'apple_health/apple_health_data_source.dart';
 import 'mock/mock_fitness_data_source.dart';
 
 class DeviceIntegrationRepositoryImpl implements DeviceIntegrationRepository {
-  DeviceIntegrationRepositoryImpl(this._appleHealthDataSource, this._mockDataSource);
+  DeviceIntegrationRepositoryImpl(
+      this._appleHealthDataSource, this._mockDataSource);
 
   final AppleHealthDataSource _appleHealthDataSource;
   final MockFitnessDataSource _mockDataSource;
@@ -21,7 +22,8 @@ class DeviceIntegrationRepositoryImpl implements DeviceIntegrationRepository {
         connected: false,
         permissionStatus: 'coming_soon',
         isPreviewMode: false,
-        message: '${provider.label} integration is planned for a future release.',
+        message:
+            '${provider.label} integration is planned for a future release.',
       );
     }
 
@@ -34,7 +36,8 @@ class DeviceIntegrationRepositoryImpl implements DeviceIntegrationRepository {
         connected: true,
         permissionStatus: 'preview',
         isPreviewMode: true,
-        message: 'HealthKit is unavailable here, so GymApp will use preview workouts.',
+        message:
+            'HealthKit is unavailable here, so GymApp will use preview workouts.',
       );
     }
 
@@ -46,17 +49,22 @@ class DeviceIntegrationRepositoryImpl implements DeviceIntegrationRepository {
       connected: granted,
       permissionStatus: status,
       isPreviewMode: false,
-      message: granted ? 'Apple Health connected.' : 'Apple Health permission was not granted.',
+      message: granted
+          ? 'Apple Health connected.'
+          : 'Apple Health permission was not granted.',
     );
   }
 
   @override
-  Future<DeviceConnectionInfo> getConnectionInfo(FitnessProviderType provider) async {
-    if (provider == FitnessProviderType.healthConnect || provider == FitnessProviderType.garmin) {
+  Future<DeviceConnectionInfo> getConnectionInfo(
+      FitnessProviderType provider) async {
+    if (provider == FitnessProviderType.healthConnect ||
+        provider == FitnessProviderType.garmin) {
       // TODO(z33p): Surface native Health Connect and Garmin connection state when those integrations ship.
       return DeviceConnectionInfo(
         provider: provider,
-        available: provider == FitnessProviderType.healthConnect && Platform.isAndroid,
+        available:
+            provider == FitnessProviderType.healthConnect && Platform.isAndroid,
         connected: false,
         permissionStatus: 'coming_soon',
         isPreviewMode: false,
@@ -73,7 +81,8 @@ class DeviceIntegrationRepositoryImpl implements DeviceIntegrationRepository {
           connected: true,
           permissionStatus: 'preview',
           isPreviewMode: true,
-          message: 'Preview mode is active because HealthKit is unavailable on this device.',
+          message:
+              'Preview mode is active because HealthKit is unavailable on this device.',
         );
       }
       final status = await _appleHealthDataSource.getAuthorizationStatus();
@@ -83,7 +92,9 @@ class DeviceIntegrationRepositoryImpl implements DeviceIntegrationRepository {
         connected: status == 'authorized' || status == 'sharingAuthorized',
         permissionStatus: status,
         isPreviewMode: false,
-        message: status == 'authorized' ? 'Apple Health connected.' : 'Connect Apple Health to start importing workouts.',
+        message: status == 'authorized'
+            ? 'Apple Health connected.'
+            : 'Connect Apple Health to start importing workouts.',
       );
     }
 

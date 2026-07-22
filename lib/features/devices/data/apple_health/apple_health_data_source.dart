@@ -20,7 +20,8 @@ class AppleHealthDataSource {
   static const String statusUnavailable = 'unavailable';
   static const String statusNotDetermined = 'notDetermined';
 
-  AppleHealthDataSource() : _channel = const MethodChannel('com.gymapp.health/apple_health');
+  AppleHealthDataSource()
+      : _channel = const MethodChannel('com.gymapp.health/apple_health');
 
   final MethodChannel _channel;
 
@@ -29,7 +30,8 @@ class AppleHealthDataSource {
   Future<bool> isAvailable() async {
     if (!isSupportedPlatform) return false;
     try {
-      return (await _channel.invokeMethod<bool>('isHealthDataAvailable')) ?? false;
+      return (await _channel.invokeMethod<bool>('isHealthDataAvailable')) ??
+          false;
     } on PlatformException {
       return false;
     }
@@ -38,7 +40,8 @@ class AppleHealthDataSource {
   Future<String> getAuthorizationStatus() async {
     if (!isSupportedPlatform) return statusUnsupported;
     try {
-      return (await _channel.invokeMethod<String>('getAuthorizationStatus')) ?? statusNotDetermined;
+      return (await _channel.invokeMethod<String>('getAuthorizationStatus')) ??
+          statusNotDetermined;
     } on PlatformException {
       return statusUnavailable;
     }
@@ -47,7 +50,8 @@ class AppleHealthDataSource {
   Future<bool> requestAuthorization() async {
     if (!isSupportedPlatform) return false;
     try {
-      return (await _channel.invokeMethod<bool>('requestAuthorization')) ?? false;
+      return (await _channel.invokeMethod<bool>('requestAuthorization')) ??
+          false;
     } on PlatformException {
       return false;
     }
@@ -57,20 +61,25 @@ class AppleHealthDataSource {
     if (!isSupportedPlatform) {
       return const AppleHealthSyncPayload(workouts: [], anchorData: null);
     }
-    final method = anchorData == null || anchorData.isEmpty ? 'syncWorkouts' : 'syncWorkoutsSince';
+    final method = anchorData == null || anchorData.isEmpty
+        ? 'syncWorkouts'
+        : 'syncWorkoutsSince';
     final response = await _channel.invokeMapMethod<String, dynamic>(
           method,
-          anchorData == null || anchorData.isEmpty ? null : {'anchorData': anchorData},
+          anchorData == null || anchorData.isEmpty
+              ? null
+              : {'anchorData': anchorData},
         ) ??
         <String, dynamic>{};
-    final rawWorkouts = (response['workouts'] as List<dynamic>? ?? const <dynamic>[])
-        .cast<Map<dynamic, dynamic>>()
-        .map((item) => Map<String, dynamic>.from(item))
-        .map((payload) => ImportedWorkout.fromPlatformPayload(
-              platform: FitnessProviderType.appleHealth.toWorkoutPlatform(),
-              payload: payload,
-            ))
-        .toList();
+    final rawWorkouts =
+        (response['workouts'] as List<dynamic>? ?? const <dynamic>[])
+            .cast<Map<dynamic, dynamic>>()
+            .map((item) => Map<String, dynamic>.from(item))
+            .map((payload) => ImportedWorkout.fromPlatformPayload(
+                  platform: FitnessProviderType.appleHealth.toWorkoutPlatform(),
+                  payload: payload,
+                ))
+            .toList();
     return AppleHealthSyncPayload(
       workouts: rawWorkouts,
       anchorData: response['anchorData'] as String?,

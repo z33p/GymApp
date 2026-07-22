@@ -28,7 +28,9 @@ class FeedScreen extends ConsumerWidget {
               final workout = items[index];
               return WorkoutCard(
                 workout: workout,
-                onTap: workout.id == null ? null : () => context.push('/workouts/${workout.id}'),
+                onTap: workout.id == null
+                    ? null
+                    : () => context.push('/workouts/${workout.id}'),
               );
             },
           );
@@ -51,7 +53,8 @@ class _EmptyFeed extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.watch_rounded, size: 56, color: Theme.of(context).colorScheme.primary),
+            Icon(Icons.watch_rounded,
+                size: 56, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 20),
             Text(
               'Connect Apple Health to import workouts automatically.',

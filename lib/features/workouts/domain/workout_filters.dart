@@ -18,7 +18,8 @@ class WorkoutFilterState {
   }) {
     return WorkoutFilterState(
       query: query ?? this.query,
-      activityType: clearActivityType ? null : activityType ?? this.activityType,
+      activityType:
+          clearActivityType ? null : activityType ?? this.activityType,
       sourceName: clearSourceName ? null : sourceName ?? this.sourceName,
     );
   }

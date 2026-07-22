@@ -29,7 +29,8 @@ class LocalWorkoutRepository implements WorkoutRepository {
   }
 
   @override
-  Future<List<ImportedWorkout>> getWorkouts({WorkoutFilterState? filters}) async {
+  Future<List<ImportedWorkout>> getWorkouts(
+      {WorkoutFilterState? filters}) async {
     final db = await _database.database;
     return _dataSource.getWorkouts(db, filters: filters);
   }

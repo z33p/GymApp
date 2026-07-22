@@ -28,7 +28,8 @@ class WorkoutDetailScreen extends ConsumerWidget {
             MapEntry('End', Formatters.dateTime(item.endTime)),
             MapEntry('Duration', Formatters.duration(item.durationSeconds)),
             MapEntry('Calories', Formatters.calories(item.activeEnergyKcal)),
-            MapEntry('Distance', Formatters.distanceMeters(item.distanceMeters)),
+            MapEntry(
+                'Distance', Formatters.distanceMeters(item.distanceMeters)),
             MapEntry('Source', item.displaySource),
             MapEntry('Imported', Formatters.dateTime(item.importedAt)),
           ];
@@ -40,7 +41,8 @@ class WorkoutDetailScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      for (final fact in facts.where((entry) => entry.value != null)) ...[
+                      for (final fact
+                          in facts.where((entry) => entry.value != null)) ...[
                         Row(
                           children: [
                             Expanded(child: Text(fact.key)),
@@ -64,14 +66,16 @@ class WorkoutDetailScreen extends ConsumerWidget {
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(20),
-                    child: SelectableText(const JsonEncoder.withIndent('  ').convert(item.rawPayload)),
+                    child: SelectableText(const JsonEncoder.withIndent('  ')
+                        .convert(item.rawPayload)),
                   ),
                 ),
               ],
             ],
           );
         },
-        error: (error, _) => Center(child: Text('Failed to load workout: $error')),
+        error: (error, _) =>
+            Center(child: Text('Failed to load workout: $error')),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );

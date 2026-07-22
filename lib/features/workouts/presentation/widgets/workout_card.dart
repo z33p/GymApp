@@ -58,8 +58,12 @@ class WorkoutCard extends StatelessWidget {
             runSpacing: dsTheme.spacing.xs,
             children: [
               _FactChip(label: Formatters.duration(workout.durationSeconds)),
-              if (Formatters.calories(workout.activeEnergyKcal) case final calories?) _FactChip(label: calories),
-              if (Formatters.distanceMeters(workout.distanceMeters) case final distance?) _FactChip(label: distance),
+              if (Formatters.calories(workout.activeEnergyKcal)
+                  case final calories?)
+                _FactChip(label: calories),
+              if (Formatters.distanceMeters(workout.distanceMeters)
+                  case final distance?)
+                _FactChip(label: distance),
               _FactChip(label: workout.displaySource),
             ],
           ),

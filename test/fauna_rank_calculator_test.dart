@@ -36,10 +36,14 @@ void main() {
       (index) => workout('w$index', now.subtract(Duration(days: index))),
     );
 
-    expect(calculator.calculate(workouts.take(1).toList(), now: now).tier, FaunaTier.wolf);
-    expect(calculator.calculate(workouts.take(2).toList(), now: now).tier, FaunaTier.bear);
-    expect(calculator.calculate(workouts.take(4).toList(), now: now).tier, FaunaTier.rhino);
-    expect(calculator.calculate(workouts.take(7).toList(), now: now).tier, FaunaTier.gorilla);
+    expect(calculator.calculate(workouts.take(1).toList(), now: now).tier,
+        FaunaTier.wolf);
+    expect(calculator.calculate(workouts.take(2).toList(), now: now).tier,
+        FaunaTier.bear);
+    expect(calculator.calculate(workouts.take(4).toList(), now: now).tier,
+        FaunaTier.rhino);
+    expect(calculator.calculate(workouts.take(7).toList(), now: now).tier,
+        FaunaTier.gorilla);
     expect(calculator.calculate(workouts, now: now).tier, FaunaTier.apex);
   });
 

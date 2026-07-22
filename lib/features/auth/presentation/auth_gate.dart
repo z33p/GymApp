@@ -13,8 +13,10 @@ class AuthGate extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider);
     return currentUser.when(
-      loading: () => const Material(child: Center(child: CircularProgressIndicator())),
-      error: (error, _) => Material(child: Center(child: Text('Could not load session: $error'))),
+      loading: () =>
+          const Material(child: Center(child: CircularProgressIndicator())),
+      error: (error, _) => Material(
+          child: Center(child: Text('Could not load session: $error'))),
       data: (user) => user == null ? const LoginScreen() : child,
     );
   }

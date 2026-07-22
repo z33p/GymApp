@@ -62,7 +62,8 @@ extension on SyncStateRecord {
       lastSuccessfulSyncAt: lastSuccessfulSyncAt ?? this.lastSuccessfulSyncAt,
       lastAttemptedSyncAt: lastAttemptedSyncAt ?? this.lastAttemptedSyncAt,
       status: status ?? this.status,
-      errorMessage: clearErrorMessage ? null : errorMessage ?? this.errorMessage,
+      errorMessage:
+          clearErrorMessage ? null : errorMessage ?? this.errorMessage,
     );
   }
 }

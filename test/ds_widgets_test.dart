@@ -21,7 +21,8 @@ void main() {
     expect(find.text('Card Content'), findsOneWidget);
   });
 
-  testWidgets('DsGap renders correct height/width based on theme spacing', (tester) async {
+  testWidgets('DsGap renders correct height/width based on theme spacing',
+      (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(extensions: [DsTheme.light()]),

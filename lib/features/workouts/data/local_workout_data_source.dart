@@ -6,7 +6,8 @@ import '../domain/workout_filters.dart';
 class LocalWorkoutDataSource {
   const LocalWorkoutDataSource();
 
-  Future<List<ImportedWorkout>> getFeedWorkouts(Database db, {int limit = 50}) async {
+  Future<List<ImportedWorkout>> getFeedWorkouts(Database db,
+      {int limit = 50}) async {
     final rows = await db.query(
       'imported_workouts',
       where: 'deleted_at IS NULL',
@@ -16,7 +17,8 @@ class LocalWorkoutDataSource {
     return rows.map(ImportedWorkout.fromMap).toList();
   }
 
-  Future<List<ImportedWorkout>> getWorkouts(Database db, {WorkoutFilterState? filters}) async {
+  Future<List<ImportedWorkout>> getWorkouts(Database db,
+      {WorkoutFilterState? filters}) async {
     final whereClauses = <String>['deleted_at IS NULL'];
     final args = <Object?>[];
     if (filters != null) {
@@ -30,7 +32,8 @@ class LocalWorkoutDataSource {
       }
       if (filters.query.trim().isNotEmpty) {
         final query = '%${filters.query.trim().toLowerCase()}%';
-        whereClauses.add("(LOWER(activity_type) LIKE ? OR LOWER(COALESCE(source_name, '')) LIKE ?)");
+        whereClauses.add(
+            "(LOWER(activity_type) LIKE ? OR LOWER(COALESCE(source_name, '')) LIKE ?)");
         args.addAll([query, query]);
       }
     }
@@ -44,12 +47,14 @@ class LocalWorkoutDataSource {
   }
 
   Future<ImportedWorkout?> getWorkoutById(Database db, int id) async {
-    final rows = await db.query('imported_workouts', where: 'id = ?', whereArgs: [id], limit: 1);
+    final rows = await db.query('imported_workouts',
+        where: 'id = ?', whereArgs: [id], limit: 1);
     if (rows.isEmpty) return null;
     return ImportedWorkout.fromMap(rows.first);
   }
 
-  Future<void> upsertWorkouts(Database db, List<ImportedWorkout> workouts) async {
+  Future<void> upsertWorkouts(
+      Database db, List<ImportedWorkout> workouts) async {
     await db.transaction((txn) async {
       for (final workout in workouts) {
         if (workout.externalId != null) {

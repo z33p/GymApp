@@ -8,17 +8,24 @@ class WorkoutStatsCalculator {
 
   static const int maxStreakDays = 365;
 
-  WorkoutProgressStats calculate(List<ImportedWorkout> workouts, {DateTime? now}) {
+  WorkoutProgressStats calculate(List<ImportedWorkout> workouts,
+      {DateTime? now}) {
     final reference = (now ?? DateTime.now()).toUtc();
-    final startOfWeek = DateTime.utc(reference.year, reference.month, reference.day)
-        .subtract(Duration(days: reference.weekday - 1));
+    final startOfWeek =
+        DateTime.utc(reference.year, reference.month, reference.day)
+            .subtract(Duration(days: reference.weekday - 1));
     final startOfMonth = DateTime.utc(reference.year, reference.month);
 
-    final thisWeek = workouts.where((workout) => !workout.startTime.isBefore(startOfWeek)).toList();
-    final thisMonth = workouts.where((workout) => !workout.startTime.isBefore(startOfMonth)).toList();
+    final thisWeek = workouts
+        .where((workout) => !workout.startTime.isBefore(startOfWeek))
+        .toList();
+    final thisMonth = workouts
+        .where((workout) => !workout.startTime.isBefore(startOfMonth))
+        .toList();
 
     final distinctWorkoutDays = workouts
-        .map((workout) => DateTime.utc(workout.startTime.year, workout.startTime.month, workout.startTime.day))
+        .map((workout) => DateTime.utc(workout.startTime.year,
+            workout.startTime.month, workout.startTime.day))
         .toSet()
         .toList()
       ..sort((a, b) => b.compareTo(a));
@@ -35,9 +42,12 @@ class WorkoutStatsCalculator {
     return WorkoutProgressStats(
       workoutsThisWeek: thisWeek.length,
       workoutsThisMonth: thisMonth.length,
-      totalDurationThisWeekSeconds: thisWeek.fold(0, (sum, workout) => sum + workout.durationSeconds),
-      totalCaloriesThisWeek: thisWeek.fold(0.0, (sum, workout) => sum + (workout.activeEnergyKcal ?? 0)),
-      totalDistanceThisWeekMeters: thisWeek.fold(0.0, (sum, workout) => sum + (workout.distanceMeters ?? 0)),
+      totalDurationThisWeekSeconds:
+          thisWeek.fold(0, (sum, workout) => sum + workout.durationSeconds),
+      totalCaloriesThisWeek: thisWeek.fold(
+          0.0, (sum, workout) => sum + (workout.activeEnergyKcal ?? 0)),
+      totalDistanceThisWeekMeters: thisWeek.fold(
+          0.0, (sum, workout) => sum + (workout.distanceMeters ?? 0)),
       currentStreakDays: streak,
     );
   }

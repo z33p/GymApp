@@ -2,7 +2,8 @@ import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
 class AppDatabase {
-  AppDatabase({DatabaseFactory? factory}) : _factory = factory ?? databaseFactory;
+  AppDatabase({DatabaseFactory? factory})
+      : _factory = factory ?? databaseFactory;
 
   final DatabaseFactory _factory;
   Database? _database;
@@ -70,8 +71,10 @@ class AppDatabase {
               FOREIGN KEY(workout_id) REFERENCES imported_workouts(id)
             )
           ''');
-          await db.execute('CREATE INDEX idx_workouts_start_time ON imported_workouts(start_time DESC)');
-          await db.execute('CREATE INDEX idx_workouts_platform_external_id ON imported_workouts(platform, external_id)');
+          await db.execute(
+              'CREATE INDEX idx_workouts_start_time ON imported_workouts(start_time DESC)');
+          await db.execute(
+              'CREATE INDEX idx_workouts_platform_external_id ON imported_workouts(platform, external_id)');
         },
       ),
     );

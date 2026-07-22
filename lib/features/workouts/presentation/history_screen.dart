@@ -36,7 +36,8 @@ class HistoryScreen extends ConsumerWidget {
                     hintText: 'Search workouts or sources',
                   ),
                   onChanged: (value) {
-                    ref.read(historyFiltersProvider.notifier).state = filters.copyWith(query: value);
+                    ref.read(historyFiltersProvider.notifier).state =
+                        filters.copyWith(query: value);
                   },
                 ),
                 DsGap.s(context),
@@ -46,24 +47,28 @@ class HistoryScreen extends ConsumerWidget {
                       child: DropdownButtonFormField<String?>(
                         isExpanded: true,
                         initialValue: filters.activityType,
-                        hint: Text(l10n.activityHint, overflow: TextOverflow.ellipsis),
+                        hint: Text(l10n.activityHint,
+                            overflow: TextOverflow.ellipsis),
                         items: [
                           DropdownMenuItem<String?>(
                             value: null,
-                            child: Text(l10n.allActivities, overflow: TextOverflow.ellipsis),
+                            child: Text(l10n.allActivities,
+                                overflow: TextOverflow.ellipsis),
                           ),
                           ...activities.map<DropdownMenuItem<String?>>(
                             (activity) => DropdownMenuItem<String?>(
                               value: activity,
-                              child: Text(activity.replaceAll('_', ' '), overflow: TextOverflow.ellipsis),
+                              child: Text(activity.replaceAll('_', ' '),
+                                  overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ],
                         onChanged: (value) {
-                          ref.read(historyFiltersProvider.notifier).state = filters.copyWith(
-                                activityType: value,
-                                clearActivityType: value == null,
-                              );
+                          ref.read(historyFiltersProvider.notifier).state =
+                              filters.copyWith(
+                            activityType: value,
+                            clearActivityType: value == null,
+                          );
                         },
                       ),
                     ),
@@ -72,24 +77,28 @@ class HistoryScreen extends ConsumerWidget {
                       child: DropdownButtonFormField<String?>(
                         isExpanded: true,
                         initialValue: filters.sourceName,
-                        hint: Text(l10n.sourceHint, overflow: TextOverflow.ellipsis),
+                        hint: Text(l10n.sourceHint,
+                            overflow: TextOverflow.ellipsis),
                         items: [
                           DropdownMenuItem<String?>(
                             value: null,
-                            child: Text(l10n.allSources, overflow: TextOverflow.ellipsis),
+                            child: Text(l10n.allSources,
+                                overflow: TextOverflow.ellipsis),
                           ),
                           ...sources.map<DropdownMenuItem<String?>>(
                             (source) => DropdownMenuItem<String?>(
                               value: source,
-                              child: Text(source, overflow: TextOverflow.ellipsis),
+                              child:
+                                  Text(source, overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ],
                         onChanged: (value) {
-                          ref.read(historyFiltersProvider.notifier).state = filters.copyWith(
-                                sourceName: value,
-                                clearSourceName: value == null,
-                              );
+                          ref.read(historyFiltersProvider.notifier).state =
+                              filters.copyWith(
+                            sourceName: value,
+                            clearSourceName: value == null,
+                          );
                         },
                       ),
                     ),
@@ -105,20 +114,24 @@ class HistoryScreen extends ConsumerWidget {
                   return Center(child: Text(l10n.noWorkoutsFound));
                 }
                 return ListView.separated(
-                  padding: EdgeInsets.fromLTRB(spacing.l, 0, spacing.l, spacing.l),
+                  padding:
+                      EdgeInsets.fromLTRB(spacing.l, 0, spacing.l, spacing.l),
                   itemCount: items.length,
                   separatorBuilder: (_, __) => DsGap.s(context),
                   itemBuilder: (context, index) {
                     final workout = items[index];
                     return WorkoutCard(
                       workout: workout,
-                      onTap: workout.id == null ? null : () => context.push('/workouts/${workout.id}'),
+                      onTap: workout.id == null
+                          ? null
+                          : () => context.push('/workouts/${workout.id}'),
                     );
                   },
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, stack) => Center(child: Text(l10n.errorLoadingHistory('$err'))),
+              error: (err, stack) =>
+                  Center(child: Text(l10n.errorLoadingHistory('$err'))),
             ),
           ),
         ],

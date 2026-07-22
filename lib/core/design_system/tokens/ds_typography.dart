@@ -16,7 +16,8 @@ class DsTypography {
     required this.caption,
   });
 
-  factory DsTypography.regular({required Color color, required Color mutedColor}) {
+  factory DsTypography.regular(
+      {required Color color, required Color mutedColor}) {
     return DsTypography(
       titleLarge: TextStyle(
         fontSize: 22,

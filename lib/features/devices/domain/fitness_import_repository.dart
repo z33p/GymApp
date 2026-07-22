@@ -17,5 +17,6 @@ class FitnessSyncResult {
 }
 
 abstract class FitnessImportRepository {
-  Future<FitnessSyncResult> sync(FitnessProviderType provider, {bool manual = false});
+  Future<FitnessSyncResult> sync(FitnessProviderType provider,
+      {bool manual = false});
 }

@@ -32,7 +32,8 @@ void main() {
       ),
     ];
 
-    final stats = calculator.calculate(workouts, now: DateTime.utc(2026, 5, 12, 10));
+    final stats =
+        calculator.calculate(workouts, now: DateTime.utc(2026, 5, 12, 10));
 
     expect(stats.workoutsThisWeek, 2);
     expect(stats.workoutsThisMonth, 2);

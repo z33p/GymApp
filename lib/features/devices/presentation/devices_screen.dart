@@ -11,8 +11,10 @@ class DevicesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appleConnection = ref.watch(deviceConnectionProvider(FitnessProviderType.appleHealth));
-    final appleSyncState = ref.watch(syncStateProvider(FitnessProviderType.appleHealth));
+    final appleConnection =
+        ref.watch(deviceConnectionProvider(FitnessProviderType.appleHealth));
+    final appleSyncState =
+        ref.watch(syncStateProvider(FitnessProviderType.appleHealth));
     final syncController = ref.watch(syncControllerProvider);
 
     return Scaffold(
@@ -43,16 +45,21 @@ class DevicesScreen extends ConsumerWidget {
                 ),
                 primaryButtonLabel: 'Connect Apple Health',
                 onPrimaryPressed: () async {
-                  await ref.read(syncControllerProvider.notifier).connectAppleHealth();
+                  await ref
+                      .read(syncControllerProvider.notifier)
+                      .connectAppleHealth();
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Apple Health connection updated.')),
+                      const SnackBar(
+                          content: Text('Apple Health connection updated.')),
                     );
                   }
                 },
                 secondaryButtonLabel: 'Sync now',
                 onSecondaryPressed: () async {
-                  await ref.read(syncControllerProvider.notifier).syncAppleHealth();
+                  await ref
+                      .read(syncControllerProvider.notifier)
+                      .syncAppleHealth();
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Workout sync complete.')),
@@ -60,18 +67,21 @@ class DevicesScreen extends ConsumerWidget {
                   }
                 },
               ),
-              error: (error, _) => Text('Failed to load Apple Health status: $error'),
+              error: (error, _) =>
+                  Text('Failed to load Apple Health status: $error'),
               loading: () => const Center(child: CircularProgressIndicator()),
             ),
           const SizedBox(height: 16),
           const _ComingSoonCard(
             title: 'Health Connect',
-            description: 'Android import architecture is ready for future Health Connect support.',
+            description:
+                'Android import architecture is ready for future Health Connect support.',
           ),
           const SizedBox(height: 16),
           const _ComingSoonCard(
             title: 'Garmin',
-            description: 'Garmin sync is planned after the local-first MVP ships.',
+            description:
+                'Garmin sync is planned after the local-first MVP ships.',
           ),
           const SizedBox(height: 16),
           Card(
@@ -80,18 +90,23 @@ class DevicesScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Manual sync', style: Theme.of(context).textTheme.titleLarge),
+                  Text('Manual sync',
+                      style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 8),
-                  const Text('Sync on demand and refresh the local feed from Apple Health or preview data.'),
+                  const Text(
+                      'Sync on demand and refresh the local feed from Apple Health or preview data.'),
                   const SizedBox(height: 16),
                   FilledButton.icon(
                     onPressed: syncController.isLoading
                         ? null
                         : () async {
-                            await ref.read(syncControllerProvider.notifier).syncAppleHealth();
+                            await ref
+                                .read(syncControllerProvider.notifier)
+                                .syncAppleHealth();
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Manual sync finished.')),
+                                const SnackBar(
+                                    content: Text('Manual sync finished.')),
                               );
                             }
                           },
@@ -100,7 +115,9 @@ class DevicesScreen extends ConsumerWidget {
                   ),
                   if (syncController.hasError) ...[
                     const SizedBox(height: 12),
-                    Text('Sync error: ${syncController.error}', style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                    Text('Sync error: ${syncController.error}',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.error)),
                   ],
                 ],
               ),
@@ -145,7 +162,9 @@ class _DeviceCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(child: Text(title, style: Theme.of(context).textTheme.titleLarge)),
+                Expanded(
+                    child: Text(title,
+                        style: Theme.of(context).textTheme.titleLarge)),
                 Chip(label: Text(status)),
               ],
             ),
@@ -164,7 +183,9 @@ class _DeviceCard extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                FilledButton(onPressed: onPrimaryPressed, child: Text(primaryButtonLabel)),
+                FilledButton(
+                    onPressed: onPrimaryPressed,
+                    child: Text(primaryButtonLabel)),
                 OutlinedButton.icon(
                   onPressed: onSecondaryPressed,
                   icon: const Icon(Icons.sync_rounded),
@@ -195,7 +216,9 @@ class _ComingSoonCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(child: Text(title, style: Theme.of(context).textTheme.titleLarge)),
+                Expanded(
+                    child: Text(title,
+                        style: Theme.of(context).textTheme.titleLarge)),
                 const Chip(label: Text('Coming soon')),
               ],
             ),
