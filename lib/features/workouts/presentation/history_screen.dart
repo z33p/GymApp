@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/app_providers.dart';
 import '../../../core/design_system/ds_theme.dart';
 import '../../../core/design_system/widgets/ds_gap.dart';
+import '../../../l10n/app_localizations.dart';
 import 'widgets/workout_card.dart';
 
 class HistoryScreen extends ConsumerWidget {
@@ -19,9 +20,10 @@ class HistoryScreen extends ConsumerWidget {
     final sources = calculator.distinctSources(allWorkouts);
     final filters = ref.watch(historyFiltersProvider);
     final spacing = context.dsSpacing;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Workout History')),
+      appBar: AppBar(title: Text(l10n.workoutHistoryTitle)),
       body: Column(
         children: [
           Padding(
@@ -44,11 +46,11 @@ class HistoryScreen extends ConsumerWidget {
                       child: DropdownButtonFormField<String?>(
                         isExpanded: true,
                         initialValue: filters.activityType,
-                        hint: const Text('Activity', overflow: TextOverflow.ellipsis),
+                        hint: Text(l10n.activityHint, overflow: TextOverflow.ellipsis),
                         items: [
-                          const DropdownMenuItem<String?>(
+                          DropdownMenuItem<String?>(
                             value: null,
-                            child: Text('All activities', overflow: TextOverflow.ellipsis),
+                            child: Text(l10n.allActivities, overflow: TextOverflow.ellipsis),
                           ),
                           ...activities.map<DropdownMenuItem<String?>>(
                             (activity) => DropdownMenuItem<String?>(
@@ -70,11 +72,11 @@ class HistoryScreen extends ConsumerWidget {
                       child: DropdownButtonFormField<String?>(
                         isExpanded: true,
                         initialValue: filters.sourceName,
-                        hint: const Text('Source', overflow: TextOverflow.ellipsis),
+                        hint: Text(l10n.sourceHint, overflow: TextOverflow.ellipsis),
                         items: [
-                          const DropdownMenuItem<String?>(
+                          DropdownMenuItem<String?>(
                             value: null,
-                            child: Text('All sources', overflow: TextOverflow.ellipsis),
+                            child: Text(l10n.allSources, overflow: TextOverflow.ellipsis),
                           ),
                           ...sources.map<DropdownMenuItem<String?>>(
                             (source) => DropdownMenuItem<String?>(
@@ -100,7 +102,7 @@ class HistoryScreen extends ConsumerWidget {
             child: workouts.when(
               data: (items) {
                 if (items.isEmpty) {
-                  return const Center(child: Text('No workouts match your current filters.'));
+                  return Center(child: Text(l10n.noWorkoutsFound));
                 }
                 return ListView.separated(
                   padding: EdgeInsets.fromLTRB(spacing.l, 0, spacing.l, spacing.l),
@@ -116,7 +118,7 @@ class HistoryScreen extends ConsumerWidget {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, stack) => Center(child: Text('Error loading history: $err')),
+              error: (err, stack) => Center(child: Text(l10n.errorLoadingHistory('$err'))),
             ),
           ),
         ],

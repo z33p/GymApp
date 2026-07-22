@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/config/app_providers.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../core/widgets/stat_card.dart';
+import '../../../l10n/app_localizations.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -11,8 +12,9 @@ class ProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stats = ref.watch(progressStatsProvider);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Progress')),
+      appBar: AppBar(title: Text(l10n.progressTitle)),
       body: stats.when(
         data: (value) {
           return GridView.count(
@@ -31,7 +33,7 @@ class ProgressScreen extends ConsumerWidget {
             ],
           );
         },
-        error: (error, _) => Center(child: Text('Failed to load progress: $error')),
+        error: (error, _) => Center(child: Text(l10n.failedToLoadProgress('$error'))),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );

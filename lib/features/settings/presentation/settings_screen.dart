@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/config/app_providers.dart';
 import '../../../core/config/app_settings.dart';
+import '../../../l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -12,16 +13,17 @@ class SettingsScreen extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
     final settings = ref.watch(settingsControllerProvider);
     final syncController = ref.watch(syncControllerProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
           Card(
             child: ListTile(
               leading: const CircleAvatar(child: Icon(Icons.person_rounded)),
-              title: Text(user.value?.displayName ?? 'Local athlete'),
+              title: Text(user.value?.displayName ?? l10n.localAthlete),
               subtitle: Text('@${user.value?.username ?? 'gymapp'}'),
             ),
           ),
@@ -61,7 +63,7 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            error: (error, _) => Text('Failed to load settings: $error'),
+            error: (error, _) => Text(l10n.failedToLoadSettings('$error')),
             loading: () => const Center(child: CircularProgressIndicator()),
           ),
           const SizedBox(height: 16),
@@ -71,9 +73,9 @@ class SettingsScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Local data', style: Theme.of(context).textTheme.titleMedium),
+                  Text(l10n.localDataTitle, style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 8),
-                  const Text('GymApp stores workouts, sync state, and your mock profile locally for the MVP.'),
+                  Text(l10n.localDataDescription),
                   const SizedBox(height: 16),
                   FilledButton.tonalIcon(
                     onPressed: syncController.isLoading
@@ -82,12 +84,12 @@ class SettingsScreen extends ConsumerWidget {
                             await ref.read(syncControllerProvider.notifier).clearLocalData();
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Local data cleared.')),
+                                SnackBar(content: Text(l10n.localDataCleared)),
                               );
                             }
                           },
                     icon: const Icon(Icons.delete_outline_rounded),
-                    label: const Text('Clear local data'),
+                    label: Text(l10n.clearLocalData),
                   ),
                 ],
               ),

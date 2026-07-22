@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/config/app_providers.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/auth_gate.dart';
+import 'l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,12 +55,12 @@ class _GymAppState extends ConsumerState<GymApp> with WidgetsBindingObserver {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: settings?.themeMode ?? ThemeMode.system,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
       builder: (context, child) {
         final content = bootstrap.when(
           data: (_) => AuthGate(child: child ?? const SizedBox.shrink()),
-          error: (error, _) => Material(
-            child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
