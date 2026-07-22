@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_providers.dart';
+import '../../../core/design_system/ds_theme.dart';
+import '../../../core/design_system/widgets/ds_gap.dart';
 import 'widgets/workout_card.dart';
 
 class HistoryScreen extends ConsumerWidget {
@@ -16,13 +18,14 @@ class HistoryScreen extends ConsumerWidget {
     final activities = calculator.distinctActivities(allWorkouts);
     final sources = calculator.distinctSources(allWorkouts);
     final filters = ref.watch(historyFiltersProvider);
+    final spacing = context.dsSpacing;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Workout History')),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+            padding: EdgeInsets.fromLTRB(spacing.l, 0, spacing.l, spacing.m),
             child: Column(
               children: [
                 TextField(
@@ -34,7 +37,7 @@ class HistoryScreen extends ConsumerWidget {
                     ref.read(historyFiltersProvider.notifier).state = filters.copyWith(query: value);
                   },
                 ),
-                const SizedBox(height: 12),
+                DsGap.s(context),
                 Row(
                   children: [
                     Expanded(
@@ -62,7 +65,7 @@ class HistoryScreen extends ConsumerWidget {
                         },
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    DsGap.s(context, horizontal: true),
                     Expanded(
                       child: DropdownButtonFormField<String?>(
                         isExpanded: true,
@@ -100,9 +103,9 @@ class HistoryScreen extends ConsumerWidget {
                   return const Center(child: Text('No workouts match your current filters.'));
                 }
                 return ListView.separated(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                  padding: EdgeInsets.fromLTRB(spacing.l, 0, spacing.l, spacing.l),
                   itemCount: items.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 14),
+                  separatorBuilder: (_, __) => DsGap.s(context),
                   itemBuilder: (context, index) {
                     final workout = items[index];
                     return WorkoutCard(
