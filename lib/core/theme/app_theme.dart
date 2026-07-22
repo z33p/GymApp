@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../design_system/ds_theme.dart';
+
 class AppTheme {
   const AppTheme._();
 
@@ -8,7 +10,7 @@ class AppTheme {
       seedColor: const Color(0xFF6D5DFC),
       brightness: Brightness.light,
     );
-    return _theme(colorScheme);
+    return _theme(colorScheme, DsTheme.light());
   }
 
   static ThemeData dark() {
@@ -17,7 +19,7 @@ class AppTheme {
       brightness: Brightness.dark,
       surface: const Color(0xFF161A2C),
     );
-    return _theme(colorScheme).copyWith(
+    return _theme(colorScheme, DsTheme.dark()).copyWith(
       scaffoldBackgroundColor: const Color(0xFF0B0F1A),
       cardTheme: const CardThemeData(
         color: Color(0xFF171C30),
@@ -26,10 +28,11 @@ class AppTheme {
     );
   }
 
-  static ThemeData _theme(ColorScheme colorScheme) {
+  static ThemeData _theme(ColorScheme colorScheme, DsTheme dsTheme) {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
+      extensions: [dsTheme],
       scaffoldBackgroundColor: colorScheme.surface,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
