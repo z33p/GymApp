@@ -39,14 +39,18 @@ class HistoryScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: DropdownButtonFormField<String?>(
+                        isExpanded: true,
                         initialValue: filters.activityType,
-                        hint: const Text('Activity'),
+                        hint: const Text('Activity', overflow: TextOverflow.ellipsis),
                         items: [
-                          const DropdownMenuItem<String?>(value: null, child: Text('All activities')),
+                          const DropdownMenuItem<String?>(
+                            value: null,
+                            child: Text('All activities', overflow: TextOverflow.ellipsis),
+                          ),
                           ...activities.map<DropdownMenuItem<String?>>(
                             (activity) => DropdownMenuItem<String?>(
                               value: activity,
-                              child: Text(activity.replaceAll('_', ' ')),
+                              child: Text(activity.replaceAll('_', ' '), overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ],
@@ -61,12 +65,19 @@ class HistoryScreen extends ConsumerWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: DropdownButtonFormField<String?>(
+                        isExpanded: true,
                         initialValue: filters.sourceName,
-                        hint: const Text('Source'),
+                        hint: const Text('Source', overflow: TextOverflow.ellipsis),
                         items: [
-                          const DropdownMenuItem<String?>(value: null, child: Text('All sources')),
+                          const DropdownMenuItem<String?>(
+                            value: null,
+                            child: Text('All sources', overflow: TextOverflow.ellipsis),
+                          ),
                           ...sources.map<DropdownMenuItem<String?>>(
-                            (source) => DropdownMenuItem<String?>(value: source, child: Text(source)),
+                            (source) => DropdownMenuItem<String?>(
+                              value: source,
+                              child: Text(source, overflow: TextOverflow.ellipsis),
+                            ),
                           ),
                         ],
                         onChanged: (value) {
@@ -101,8 +112,8 @@ class HistoryScreen extends ConsumerWidget {
                   },
                 );
               },
-              error: (error, _) => Center(child: Text('Failed to load history: $error')),
               loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, stack) => Center(child: Text('Error loading history: $err')),
             ),
           ),
         ],
