@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/devices/presentation/devices_screen.dart';
-import '../../features/feed/presentation/feed_screen.dart';
-import '../../features/gamification/presentation/habitat_screen.dart';
+import '../../features/feed/presentation/publish_screen.dart';
+import '../../features/home/presentation/home_screen.dart';
 import '../../features/progress/presentation/progress_screen.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/workouts/presentation/history_screen.dart';
@@ -20,13 +20,21 @@ GoRouter createRouter() {
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         routes: [
-          GoRoute(path: '/home', builder: (_, __) => const HabitatScreen()),
-          GoRoute(path: '/feed', builder: (_, __) => const FeedScreen()),
-          GoRoute(path: '/history', builder: (_, __) => const HistoryScreen()),
-          GoRoute(path: '/progress', builder: (_, __) => const ProgressScreen()),
+          GoRoute(path: '/home', builder: (_, __) => const HomeScreen()),
+          GoRoute(
+              path: '/progress', builder: (_, __) => const ProgressScreen()),
           GoRoute(path: '/devices', builder: (_, __) => const DevicesScreen()),
-          GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
+          GoRoute(
+              path: '/settings', builder: (_, __) => const SettingsScreen()),
         ],
+      ),
+      GoRoute(
+        path: '/publish',
+        builder: (_, __) => const PublishScreen(),
+      ),
+      GoRoute(
+        path: '/history',
+        builder: (_, __) => const HistoryScreen(),
       ),
       GoRoute(
         path: '/workouts/:id',

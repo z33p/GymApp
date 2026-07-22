@@ -25,12 +25,14 @@ class AppShell extends StatelessWidget {
 
     int getSelectedIndex() {
       for (int i = 0; i < leftTabs.length; i++) {
-        if (location == leftTabs[i].$1 || location.startsWith('${leftTabs[i].$1}/')) {
+        if (location == leftTabs[i].$1 ||
+            location.startsWith('${leftTabs[i].$1}/')) {
           return i;
         }
       }
       for (int i = 0; i < rightTabs.length; i++) {
-        if (location == rightTabs[i].$1 || location.startsWith('${rightTabs[i].$1}/')) {
+        if (location == rightTabs[i].$1 ||
+            location.startsWith('${rightTabs[i].$1}/')) {
           return i + 2; // Offset for center FAB
         }
       }
