@@ -1,0 +1,56 @@
+{
+  "@@locale": "en",
+  "appTitle": "GymApp",
+  "homeTitle": "Home",
+  "workoutHistoryTitle": "Workout History",
+  "progressTitle": "Progress",
+  "settingsTitle": "Settings",
+  "workoutDetailTitle": "Workout Detail",
+  "workoutNotFound": "Workout not found.",
+  "failedToLoadWorkout": "Failed to load workout: {error}",
+  "@failedToLoadWorkout": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noWorkoutsFound": "No workouts match your current filters.",
+  "errorLoadingHistory": "Error loading history: {error}",
+  "@errorLoadingHistory": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "activityHint": "Activity",
+  "allActivities": "All activities",
+  "sourceHint": "Source",
+  "allSources": "All sources",
+  "localAthlete": "Local athlete",
+  "failedToLoadSettings": "Failed to load settings: {error}",
+  "@failedToLoadSettings": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "localDataTitle": "Local data",
+  "localDataDescription": "GymApp stores workouts, sync state, and your mock profile locally for the MVP.",
+  "clearLocalData": "Clear local data",
+  "localDataCleared": "Local data cleared.",
+  "failedToLoadProgress": "Failed to load progress: {error}",
+  "@failedToLoadProgress": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "retry": "Retry",
+  "dismiss": "Dismiss",
+  "retrySync": "Retry sync",
+  "startupError": "GymApp could not finish startup."
+}
